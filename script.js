@@ -3,34 +3,10 @@ const ctx = canvas.getContext('2d');
 
 let draggedElement = null;
 
-// Default elements
-const elements = ['Air', 'Earth', 'Fire', 'Water'];
-const elementWidth = 100;
-const elementHeight = 50;
-const elementSpacing = 20;
-
-function drawElements() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'black';
-    ctx.font = '20px Arial';
-    elements.forEach((element, index) => {
-        const x = 10;
-        const y = 10 + index * (elementHeight + elementSpacing);
-        ctx.fillText(element, x, y + 20);
-    });
-}
-
-drawElements();
-
+// Event listeners for dragging elements
 document.querySelectorAll('.element').forEach(element => {
-    element.addEventListener('click', (event) => {
-        const rect = canvas.getBoundingClientRect();
-        const x = rect.width / 2 - elementWidth / 2;
-        const y = rect.height / 2 - elementHeight / 2;
-        // Draw the clicked element on the canvas
-        ctx.fillStyle = 'black';
-        ctx.font = '20px Arial';
-        ctx.fillText(element.textContent, x, y);
+    element.addEventListener('dragstart', (event) => {
+        draggedElement = event.target;
     });
 });
 
@@ -53,7 +29,24 @@ canvas.addEventListener('drop', (event) => {
     }
 });
 
-// Prevent right-click context menu
-canvas.addEventListener('contextmenu', (event) => {
-    event.preventDefault();
+// Event listeners for clicking elements to spawn them on the left side
+document.querySelectorAll('.element').forEach(element => {
+    element.addEventListener('click', (event) => {
+        const elementText = event.target.textContent;
+        const elementContainer = document.createElement('div');
+        elementContainer.className = 'element-container';
+        elementContainer.textContent = elementText;
+        elementContainer.draggable = true;
+        elementContainer.addEventListener('dragstart', (event) => {
+            draggedElement = event.target;
+        });
+        document.getElementById('elementContainer').appendChild(elementContainer);
+    });
+});
+
+// Event listeners for dragging element containers
+document.querySelectorAll('.element-container').forEach(elementContainer => {
+    elementContainer.addEventListener('dragstart', (event) => {
+        draggedElement = event.target;
+    });
 });
