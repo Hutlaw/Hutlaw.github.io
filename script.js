@@ -5,19 +5,24 @@ let draggedElement = null;
 
 // Default elements
 const elements = ['Earth', 'Air', 'Water', 'Fire'];
-const elementWidth = 100;
-const elementHeight = 50;
 const elementSpacing = 20;
 
 function drawElements() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'black';
+    ctx.font = '20px Arial';
     elements.forEach((element, index) => {
+        const textWidth = ctx.measureText(element).width;
         const x = 10;
-        const y = 10 + index * (elementHeight + elementSpacing);
-        ctx.fillStyle = 'black';
-        ctx.fillRect(x, y, elementWidth, elementHeight);
-        ctx.fillStyle = 'white';
-        ctx.fillText(element, x + 10, y + 30);
+        const y = 10 + index * (20 + elementSpacing);
+        const width = textWidth + 20; // Add some padding
+        const height = 20 + 20; // Add some padding
+        // Draw the box outline
+        ctx.beginPath();
+        ctx.rect(x, y, width, height);
+        ctx.stroke();
+        // Draw the text
+        ctx.fillText(element, x + 10, y + 20);
     });
 }
 
@@ -41,7 +46,7 @@ canvas.addEventListener('drop', (event) => {
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
         // Check if dropping on the right side
-        if (x > elementWidth) {
+        if (x > 120) { // Adjust this value based on the size of your elements
             // Draw the dropped element on the canvas
             ctx.fillStyle = 'black';
             ctx.font = '20px Arial';
