@@ -17,8 +17,12 @@ canvas {
 .element {
     padding: 10px;
     cursor: pointer;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
 }
 
-#madeElementsContainer {
+#elementContainer {
     padding: 10px;
 }
