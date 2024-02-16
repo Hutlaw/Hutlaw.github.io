@@ -18,13 +18,13 @@ canvas {
     padding: 10px;
     cursor: pointer;
     margin-bottom: 5px;
-    border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #fff;
     user-select: none; /* Prevent text highlighting */
 }
 
 .element-container {
+    padding: 5px;
     margin-bottom: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
