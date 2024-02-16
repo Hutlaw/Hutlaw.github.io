@@ -21,6 +21,7 @@ canvas {
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #fff;
+    user-select: none; /* Prevent text selection */
 }
 
 #elementContainer {
