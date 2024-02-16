@@ -21,9 +21,13 @@ canvas {
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #fff;
-    user-select: none; /* Prevent text selection */
+    user-select: none; /* Prevent text highlighting */
 }
 
-#elementContainer {
-    padding: 10px;
+.element-container {
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: move;
 }
