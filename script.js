@@ -1,23 +1,52 @@
-let elements = [];
+let elements = [
+    { name: "fire", displayName: "Fire" },
+    { name: "water", displayName: "Water" },
+    { name: "earth", displayName: "Earth" },
+    { name: "air", displayName: "Air" }
+];
 
-function combine() {
-    let input = document.getElementById("input").value.trim().toLowerCase();
-    if (input === "") return;
+let combinations = [
+    { elements: ["fire", "water"], result: "Steam" },
+    { elements: ["fire", "earth"], result: "Lava" },
+    { elements: ["fire", "air"], result: "Energy" },
+    { elements: ["water", "earth"], result: "Mud" },
+    { elements: ["water", "air"], result: "Mist" },
+    { elements: ["earth", "air"], result: "Dust" }
+];
 
-    let newElement = { name: input, created: false };
-    elements.push(newElement);
+document.querySelectorAll(".element").forEach(element => {
+    element.addEventListener("click", () => {
+        let selectedElement = element.getAttribute("data-name");
+        combine(selectedElement);
+    });
+});
 
-    updateElements();
-    document.getElementById("input").value = "";
+function combine(selectedElement) {
+    let combination = combinations.find(combination => {
+        return combination.elements.includes(selectedElement);
+    });
+
+    if (combination) {
+        let resultElement = elements.find(element => {
+            return element.name === combination.result.toLowerCase();
+        });
+
+        if (resultElement && !elements.includes(resultElement)) {
+            elements.push(resultElement);
+            updateElements();
+        }
+    }
 }
 
 function updateElements() {
-    let elementsList = document.getElementById("elements");
-    elementsList.innerHTML = "";
-    
+    let elementsContainer = document.getElementById("elements");
+    elementsContainer.innerHTML = "";
+
     elements.forEach(element => {
-        let listItem = document.createElement("li");
-        listItem.textContent = element.name;
-        elementsList.appendChild(listItem);
+        let elementDiv = document.createElement("div");
+        elementDiv.classList.add("element");
+        elementDiv.setAttribute("data-name", element.name);
+        elementDiv.textContent = element.displayName;
+        elementsContainer.appendChild(elementDiv);
     });
 }
