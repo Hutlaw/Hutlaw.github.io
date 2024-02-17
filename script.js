@@ -3,9 +3,9 @@ const ctx = canvas.getContext('2d');
 
 let draggedElement = null;
 
-// Event listeners for dragging elements
-document.querySelectorAll('.element').forEach(element => {
-    element.addEventListener('dragstart', (event) => {
+// Event listeners for dragging element containers
+document.querySelectorAll('.element-container').forEach(elementContainer => {
+    elementContainer.addEventListener('dragstart', (event) => {
         draggedElement = event.target;
     });
 });
@@ -27,26 +27,4 @@ canvas.addEventListener('drop', (event) => {
         // Reset dragged element
         draggedElement = null;
     }
-});
-
-// Event listeners for clicking elements to spawn them on the left side
-document.querySelectorAll('.element').forEach(element => {
-    element.addEventListener('click', (event) => {
-        const elementText = event.target.textContent;
-        const elementContainer = document.createElement('div');
-        elementContainer.className = 'element-container';
-        elementContainer.textContent = elementText;
-        elementContainer.draggable = true;
-        elementContainer.addEventListener('dragstart', (event) => {
-            draggedElement = event.target;
-        });
-        document.getElementById('elementContainer').appendChild(elementContainer);
-    });
-});
-
-// Event listeners for dragging element containers
-document.querySelectorAll('.element-container').forEach(elementContainer => {
-    elementContainer.addEventListener('dragstart', (event) => {
-        draggedElement = event.target;
-    });
 });
