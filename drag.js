@@ -11,3 +11,14 @@ document.querySelectorAll('.element').forEach(element => {
         offsetY = event.clientY - rect.top;
     });
 });
+
+// Event listener for mousemove on canvas
+canvas.addEventListener('mousemove', (event) => {
+    if (draggedElement) {
+        event.preventDefault(); // Prevent default to allow dropping
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left - offsetX;
+        const y = event.clientY - rect.top - offsetY;
+        drawElement(draggedElement.textContent, x, y);
+    }
+});
