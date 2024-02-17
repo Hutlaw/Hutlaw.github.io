@@ -18,20 +18,12 @@ canvas {
     padding: 10px;
     cursor: pointer;
     margin-bottom: 5px;
+    border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #fff;
     user-select: none; /* Prevent text highlighting */
 }
 
-.element-container {
-    padding: 5px;
-    margin-bottom: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    cursor: move;
-    display: inline-block; /* Ensure elements are displayed in a line */
-    width: 100%; /* Take up full width of container */
-    box-sizing: border-box; /* Include padding in width calculation */
-    text-align: center; /* Center text horizontally */
+#elementContainer {
+    padding: 10px;
 }
