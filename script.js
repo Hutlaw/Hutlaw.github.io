@@ -6,14 +6,13 @@ let offsetX = 0;
 let offsetY = 0;
 let isDragging = false;
 
-// Event listeners for mousedown on elements
+// Event listener for mousedown on elements
 document.querySelectorAll('.element').forEach(element => {
     element.addEventListener('mousedown', (event) => {
         draggedElement = element;
         isDragging = true;
-        const rect = canvas.getBoundingClientRect();
-        offsetX = event.clientX - rect.left - parseInt(window.getComputedStyle(element).left);
-        offsetY = event.clientY - rect.top - parseInt(window.getComputedStyle(element).top);
+        offsetX = event.offsetX;
+        offsetY = event.offsetY;
     });
 });
 
@@ -23,8 +22,7 @@ canvas.addEventListener('mousemove', (event) => {
         const rect = canvas.getBoundingClientRect();
         const x = event.clientX - rect.left - offsetX;
         const y = event.clientY - rect.top - offsetY;
-        draggedElement.style.left = x + 'px';
-        draggedElement.style.top = y + 'px';
+        drawElement(draggedElement.textContent, x, y);
     }
 });
 
@@ -33,15 +31,17 @@ canvas.addEventListener('mouseup', (event) => {
     if (isDragging && draggedElement) {
         isDragging = false;
         const rect = canvas.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-        const newElement = document.createElement('div');
-        newElement.textContent = draggedElement.textContent;
-        newElement.className = 'element';
-        newElement.style.position = 'absolute';
-        newElement.style.left = x + 'px';
-        newElement.style.top = y + 'px';
-        document.body.appendChild(newElement);
+        const x = event.clientX - rect.left - offsetX;
+        const y = event.clientY - rect.top - offsetY;
+        drawElement(draggedElement.textContent, x, y);
     }
     draggedElement = null;
 });
+
+// Function to draw the element on the canvas
+function drawElement(text, x, y) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'black';
+    ctx.font = '20px Arial';
+    ctx.fillText(text, x, y);
+}
