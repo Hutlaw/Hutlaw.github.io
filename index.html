@@ -7,14 +7,23 @@
 <body>
     <div id="game">
         <div id="elements">
-            <!-- Elements will be added here dynamically -->
+            <div class="element" draggable="true" data-name="fire">Fire</div>
+            <div class="element" draggable="true" data-name="water">Water</div>
+            <div class="element" draggable="true" data-name="earth">Earth</div>
+            <div class="element" draggable="true" data-name="air">Air</div>
         </div>
         <div id="combinations">
             <h2>Combinations:</h2>
-            <ul id="combination-list">
-                <!-- Combinations will be added here dynamically -->
+            <ul>
+                <li>Fire + Water = Steam</li>
+                <li>Fire + Earth = Lava</li>
+                <li>Fire + Air = Energy</li>
+                <li>Water + Earth = Mud</li>
+                <li>Water + Air = Mist</li>
+                <li>Earth + Air = Dust</li>
             </ul>
         </div>
+        <div id="result"></div>
     </div>
     <script src="script.js"></script>
 </body>
