@@ -30,4 +30,8 @@ canvas {
     border-radius: 5px;
     background-color: #fff;
     cursor: move;
+    display: inline-block; /* Ensure elements are displayed in a line */
+    width: 100%; /* Take up full width of container */
+    box-sizing: border-box; /* Include padding in width calculation */
+    text-align: center; /* Center text horizontally */
 }
