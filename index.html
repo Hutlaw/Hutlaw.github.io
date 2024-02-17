@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Alchemy</title>
+    <title>Alchemy Game</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <div id="game">
-        <input type="text" id="input" placeholder="Enter an element...">
-        <button onclick="combine()">Combine</button>
-        <ul id="elements">
-            <!-- Elements will be added here dynamically -->
-        </ul>
+        <div id="elements">
+            <div class="element" data-name="fire">Fire</div>
+            <div class="element" data-name="water">Water</div>
+            <div class="element" data-name="earth">Earth</div>
+            <div class="element" data-name="air">Air</div>
+        </div>
+        <div id="combinations">
+            <h2>Combinations:</h2>
+            <ul>
+                <li>Fire + Water = Steam</li>
+                <li>Fire + Earth = Lava</li>
+                <li>Fire + Air = Energy</li>
+                <li>Water + Earth = Mud</li>
+                <li>Water + Air = Mist</li>
+                <li>Earth + Air = Dust</li>
+            </ul>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
