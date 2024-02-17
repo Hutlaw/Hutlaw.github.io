@@ -1,72 +1,58 @@
-let elements = [
-    { name: "fire", displayName: "Fire" },
-    { name: "water", displayName: "Water" },
-    { name: "earth", displayName: "Earth" },
-    { name: "air", displayName: "Air" },
-    { name: "plant", displayName: "Plant" },
-    { name: "metal", displayName: "Metal" },
-    { name: "sand", displayName: "Sand" }
-];
-
+let draggedElement = null;
 let combinations = [
     { elements: ["fire", "water"], result: "Steam" },
     { elements: ["fire", "earth"], result: "Lava" },
     { elements: ["fire", "air"], result: "Energy" },
     { elements: ["water", "earth"], result: "Mud" },
-    { elements: ["water", "air"], result: "Rain" },
-    { elements: ["earth", "air"], result: "Dust" },
-    { elements: ["plant", "earth"], result: "Tree" },
-    { elements: ["plant", "fire"], result: "Flower" },
-    { elements: ["metal", "fire"], result: "Gold" },
-    { elements: ["sand", "fire"], result: "Glass" }
+    { elements: ["water", "air"], result: "Mist" },
+    { elements: ["earth", "air"], result: "Dust" }
 ];
 
-document.addEventListener("DOMContentLoaded", () => {
-    updateElements();
-    updateCombinations();
+document.querySelectorAll(".element").forEach(element => {
+    element.addEventListener("dragstart", dragStart);
+    element.addEventListener("dragend", dragEnd);
 });
 
-function updateElements() {
-    let elementsContainer = document.getElementById("elements");
-    elementsContainer.innerHTML = "";
-
-    elements.forEach(element => {
-        let elementDiv = document.createElement("div");
-        elementDiv.classList.add("element");
-        elementDiv.setAttribute("data-name", element.name);
-        elementDiv.textContent = element.displayName;
-        elementDiv.addEventListener("click", () => {
-            combine(element.name);
-        });
-        elementsContainer.appendChild(elementDiv);
-    });
+function dragStart(event) {
+    draggedElement = event.target.getAttribute("data-name");
 }
 
-function updateCombinations() {
-    let combinationList = document.getElementById("combination-list");
-    combinationList.innerHTML = "";
-
-    combinations.forEach(combination => {
-        let listItem = document.createElement("li");
-        listItem.textContent = combination.elements.join(" + ") + " = " + combination.result;
-        combinationList.appendChild(listItem);
-    });
+function dragEnd() {
+    draggedElement = null;
 }
 
-function combine(selectedElement) {
+document.addEventListener("dragover", dragOver);
+document.addEventListener("drop", drop);
+
+function dragOver(event) {
+    event.preventDefault();
+}
+
+function drop(event) {
+    event.preventDefault();
+    let targetElement = event.target.closest(".element");
+    if (!targetElement || targetElement === draggedElement) return;
+
+    let targetElementName = targetElement.getAttribute("data-name");
+    let combinedElement = combineElements(draggedElement, targetElementName);
+    if (combinedElement) {
+        showResult(combinedElement);
+    }
+}
+
+function combineElements(element1, element2) {
     let combination = combinations.find(combination => {
-        return combination.elements.includes(selectedElement);
+        return combination.elements.includes(element1) && combination.elements.includes(element2);
     });
 
     if (combination) {
-        let resultElement = elements.find(element => {
-            return element.name === combination.result.toLowerCase();
-        });
-
-        if (resultElement && !elements.includes(resultElement)) {
-            elements.push(resultElement);
-            updateElements();
-            updateCombinations();
-        }
+        return combination.result;
+    } else {
+        return null;
     }
+}
+
+function showResult(result) {
+    let resultElement = document.getElementById("result");
+    resultElement.textContent = result;
 }
