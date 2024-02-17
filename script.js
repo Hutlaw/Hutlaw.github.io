@@ -29,7 +29,19 @@ canvas.addEventListener('mousemove', (event) => {
 });
 
 // Event listener for mouseup on canvas
-canvas.addEventListener('mouseup', () => {
-    isDragging = false;
+canvas.addEventListener('mouseup', (event) => {
+    if (isDragging && draggedElement) {
+        isDragging = false;
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        const newElement = document.createElement('div');
+        newElement.textContent = draggedElement.textContent;
+        newElement.className = 'element';
+        newElement.style.position = 'absolute';
+        newElement.style.left = x + 'px';
+        newElement.style.top = y + 'px';
+        document.body.appendChild(newElement);
+    }
     draggedElement = null;
 });
