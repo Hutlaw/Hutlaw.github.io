@@ -1,3 +1,4 @@
+/* Existing styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -42,4 +43,16 @@ footer {
 
 .discord {
   color: #7289da;
+}
+
+/* New styles for the image */
+.profile-picture {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  z-index: 999;
 }
