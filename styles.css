@@ -18,6 +18,7 @@ header {
 
 h1 {
   margin: 0;
+  color: #6b52ae;
 }
 
 main {
@@ -30,7 +31,11 @@ section {
 }
 
 h2 {
-  color: #af8eda;
+  color: #6b52ae;
+}
+
+h3 {
+  color: #6b52ae;
 }
 
 footer {
@@ -39,6 +44,7 @@ footer {
   text-align: center;
   padding: 10px 0;
 }
+
 .discord {
   color: #7289da;
 }
