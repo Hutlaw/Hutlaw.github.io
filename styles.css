@@ -81,3 +81,9 @@ footer {
     height: 50px;
   }
 }
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
