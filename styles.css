@@ -47,12 +47,14 @@ footer {
   color: #7289da;
 }
 .profile-picture {
-  margin: 10px;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
   width: 100px;
   height: 100px;
   border-radius: 50%;
   border: 2px solid #fff;
-  float: right; 
 }
 
 .contact-icon {
