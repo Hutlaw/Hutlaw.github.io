@@ -108,3 +108,18 @@ footer {
     font-size: 24px;
     display: none;
 }
+.pipe {
+    position: absolute;
+    width: 50px;
+    background-color: green;
+}
+
+.pipe-top {
+    top: 0;
+    left: 100%;
+}
+
+.pipe-bottom {
+    bottom: 0;
+    left: 100%;
+}
