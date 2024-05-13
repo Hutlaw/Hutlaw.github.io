@@ -123,3 +123,18 @@ footer {
     bottom: 0;
     left: 100%;
 }
+
+body {
+    pointer-events: none;
+}
+
+.game-container, #bird {
+    pointer-events: auto;
+}
+
+img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
