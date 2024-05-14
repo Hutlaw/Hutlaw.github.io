@@ -27,6 +27,17 @@ header {
   background-color: #555;
   color: white;
   padding: 20px;
+  text-align: center;
+  animation: headerAnimation 15s ease infinite;
+}
+
+@keyframes headerAnimation {
+  0%, 100% {
+    background-color: #555;
+  }
+  50% {
+    background-color: #333;
+  }
 }
 
 footer {
@@ -34,6 +45,16 @@ footer {
   color: white;
   text-align: center;
   padding: 10px 0;
+  animation: footerAnimation 15s ease infinite;
+}
+
+@keyframes footerAnimation {
+  0%, 100% {
+    background-color: #555;
+  }
+  50% {
+    background-color: #333;
+  }
 }
 
 .profile-picture {
@@ -42,7 +63,7 @@ footer {
   border-radius: 50%;
   border: 2px solid #fff;
   float: right;
-  margin-top: -40px;
+  margin-top: -40px; /* Adjusted margin-top */
 }
 
 @media only screen and (max-width: 600px) {
@@ -55,4 +76,27 @@ footer {
     margin-left: auto; 
     margin-right: auto;
   }
+}
+
+.contact-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.version-marker {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: #ddd;
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
