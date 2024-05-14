@@ -2,11 +2,25 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #333;
-  color: #ddd;
+  color: #fff;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background: linear-gradient(-45deg, #f0c27b, #4b1248, #c31432, #240b36);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 header {
@@ -43,17 +57,13 @@ footer {
   position: relative;
 }
 
-.discord {
-  color: #7289da;
-}
-
 .profile-picture {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   border: 2px solid #fff;
   float: right;
-  margin-top: -20px; 
+  margin-top: -40px;
 }
 
 @media only screen and (max-width: 600px) {
