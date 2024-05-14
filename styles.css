@@ -28,16 +28,38 @@ header {
   color: white;
   padding: 20px;
   text-align: center;
+  position: relative;
   animation: headerAnimation 15s ease infinite;
 }
 
 @keyframes headerAnimation {
-  0%, 100% {
+  0% {
     background-color: #555;
   }
   50% {
     background-color: #333;
   }
+  100% {
+    background-color: #555;
+  }
+}
+
+h1 {
+  margin: 0;
+  display: inline-block;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: #af8eda;
 }
 
 footer {
@@ -45,15 +67,19 @@ footer {
   color: white;
   text-align: center;
   padding: 10px 0;
+  position: relative;
   animation: footerAnimation 15s ease infinite;
 }
 
 @keyframes footerAnimation {
-  0%, 100% {
+  0% {
     background-color: #555;
   }
   50% {
     background-color: #333;
+  }
+  100% {
+    background-color: #555;
   }
 }
 
