@@ -23,6 +23,53 @@ body {
   }
 }
 
+header {
+  background-color: #555;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  animation: headerAnimation 15s ease infinite;
+}
+
+@keyframes headerAnimation {
+  0% {
+    background-color: #555;
+  }
+  50% {
+    background-color: #333;
+  }
+  100% {
+    background-color: #555;
+  }
+}
+
+footer {
+  background-color: #555;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  position: relative;
+  animation: footerAnimation 15s ease infinite;
+}
+
+@keyframes footerAnimation {
+  0% {
+    background-color: #555;
+  }
+  50% {
+    background-color: #333;
+  }
+  100% {
+    background-color: #555;
+  }
+}
+
+h1 {
+  margin: 0;
+  display: inline-block;
+}
+
 main {
   flex: 1;
   padding: 20px;
@@ -32,9 +79,8 @@ section {
   margin-bottom: 20px;
 }
 
-h1, h2 {
-  color: #fff;
-  text-align: center;
+h3 {
+  color: #af8eda;
 }
 
 .profile-picture {
@@ -42,26 +88,40 @@ h1, h2 {
   height: 100px;
   border-radius: 50%;
   border: 2px solid #fff;
-  margin: 0 auto 10px;
-  display: block;
+  float: right;
+  margin-top: -20px; 
 }
 
 @media only screen and (max-width: 600px) {
   .profile-picture {
     width: 50px;
     height: 50px;
+    margin-top: 0;
+    float: none; 
+    display: block;
+    margin-left: auto; 
+    margin-right: auto;
   }
 }
 
-footer {
-  background-color: #555;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
+.contact-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  vertical-align: middle;
 }
 
 .version-marker {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
   color: #ddd;
   font-size: 12px;
   opacity: 0.5;
 }
+
+img {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
