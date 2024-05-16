@@ -24,6 +24,7 @@ body {
 }
 
 header {
+  opacity:0.6
   background-color: #555;
   color: white;
   padding: 20px;
@@ -45,6 +46,7 @@ header {
 }
 
 footer {
+  opacity:0
   background-color: #555;
   color: white;
   text-align: center;
