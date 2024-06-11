@@ -1,3 +1,8 @@
+/* 1 = enabled, 0 = disabled */
+:root {
+    --show-profile-picture: 1; /* Change this value to 0 to hide the profile picture */
+}
+
 @font-face {
     font-family: 'HutlawStyle';
     src: url('fonts/HutlawStyle-Regular.otf') format('opentype'),
@@ -28,6 +33,10 @@ h1 {
     border-radius: 50%;
     display: block;
     margin: 10px auto;
+}
+
+.profile-picture.hidden {
+    display: none;
 }
 
 main {
