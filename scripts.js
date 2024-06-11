@@ -1,7 +1,11 @@
+// scripts.js
+
 // Settings
+// 1 = enabled, 0 = disabled
 const showProfilePicture = 1; // Change this value to 0 to hide the profile picture
-const showPfpNotice = 1; // Change this value to 0 to hide the intellectual property notice. Didn't make your pfp? be nice and say so
-// End of settings 
+const showPfpNotice = 1; // Change this value to 0 to hide the intellectual property notice
+// end of settings 
+
 function toggleProfilePicture() {
     const profilePicture = document.querySelector('.profile-picture');
 
