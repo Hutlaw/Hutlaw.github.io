@@ -27,7 +27,7 @@ jobs:
 
     - name: Get Image URL
       id: get_image_url
-      run: echo "::set-output name=url::https://raw.githubusercontent.com/Hutlaw/hutlaw.github.io/main/images/pfp.webp"
+      run: echo "::set-output name=url::https://raw.githubusercontent.com/Hutlaw/hutlaw.github.io/main/images/pfp.png"
 
     - name: Update Profile Picture
       run: |
