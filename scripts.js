@@ -4,8 +4,8 @@
 // 1 = enabled, 0 = disabled
 const showProfilePicture = 1; // Change this value to 0 to hide the profile picture
 const showPfpNotice = 1; // Change this value to 0 to hide the intellectual property notice
-// end of settings 
 
+// Function to toggle the profile picture based on the setting
 function toggleProfilePicture() {
     const profilePicture = document.querySelector('.profile-picture');
 
@@ -16,6 +16,7 @@ function toggleProfilePicture() {
     }
 }
 
+// Function to toggle the intellectual property notice based on the setting
 function togglePfpNotice() {
     const pfpNotice = document.querySelector('.pfp-notice');
 
@@ -26,6 +27,7 @@ function togglePfpNotice() {
     }
 }
 
+// Call the functions on page load
 document.addEventListener('DOMContentLoaded', () => {
     toggleProfilePicture();
     togglePfpNotice();
