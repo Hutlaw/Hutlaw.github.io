@@ -1,13 +1,12 @@
 @font-face {
-    font-family: 'HutlawStyle';
-    src: url('fonts/HutlawStyle-Regular.otf') format('opentype'),
-         url('fonts/HutlawStyle-Regular.ttf') format('truetype');
+    font-family: 'Dekko';
+    src: url('fonts/Dekko-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 body {
-    font-family: 'HutlawStyle', sans-serif;
+    font-family: 'Dekko', sans-serif;
     color: #E3E3E3;
     background-color: #8D133C;
     margin: 0;
