@@ -2,8 +2,8 @@
 
 // Settings
 // 1 = enabled, 0 = disabled
-const showProfilePicture = 0; // Change this value to 0 to hide the profile picture
-const showPfpNotice = 0; // Change this value to 0 to hide the intellectual property notice
+const showProfilePicture = 1; // Change this value to 0 to hide the profile picture
+const showPfpNotice = 1; // Change this value to 0 to hide the intellectual property notice
 // end of settings 
 
 function toggleProfilePicture() {
