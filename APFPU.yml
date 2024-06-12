@@ -2,11 +2,14 @@ name: Update GitHub Profile Picture
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Run daily at midnight
+    - cron: '0 17 * * *'
 
 jobs:
   update_profile_picture:
     runs-on: ubuntu-latest
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.APFPU }}
 
     steps:
     - name: Checkout repository
@@ -27,14 +30,12 @@ jobs:
       run: echo "::set-output name=url::https://raw.githubusercontent.com/Hutlaw/hutlaw.github.io/main/images/pfp.webp"
 
     - name: Update Profile Picture
-      env:
-        GITHUB_TOKEN: ${{ secrets.APFPU }}
       run: |
         python - << EOF
         import requests
 
         headers = {
-            "Authorization": f"token ${{ env.GITHUB_TOKEN }}",
+            "Authorization": f"token {GITHUB_TOKEN}",
             "Accept": "application/vnd.github.v3+json"
         }
 
