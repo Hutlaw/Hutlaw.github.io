@@ -33,13 +33,16 @@ jobs:
       run: |
         python - << EOF
         import requests
+        import os
+
+        github_token = os.environ['GITHUB_TOKEN']
 
         headers = {
-            "Authorization": f"token {GITHUB_TOKEN}",
+            "Authorization": f"token {github_token}",
             "Accept": "application/vnd.github.v3+json"
         }
 
-        image_url = "${{ steps.get_image_url.outputs.url }}"
+        image_url = "{url}"
 
         # Fetch the image data
         image_data = requests.get(image_url).content
