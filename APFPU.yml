@@ -1,8 +1,8 @@
 name: Update GitHub Profile Picture
 
 on:
-  schedule:
-    - cron: '0 17 * * *'
+  page_build:
+    types: [deployment]
 
 jobs:
   update_profile_picture:
