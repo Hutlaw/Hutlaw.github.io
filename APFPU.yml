@@ -1,19 +1,57 @@
 name: Update GitHub Profile Picture
 
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: '0 0 * * *' # Run daily at midnight
 
 jobs:
-  update-profile-picture:
+  update_profile_picture:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Update GitHub Profile Picture
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
       run: |
-        IMAGE_URL="https://raw.githubusercontent.com/Hutlaw/hutlaw.github.io/main/images/pfp.webp"
-        curl -X PATCH -H "Authorization: token ${{ secrets.APFPUP }}" -d '{"avatar_url": "'"$IMAGE_URL"'"}' https://api.github.com/user
+        python -m pip install --upgrade pip
+        pip install requests
+
+    - name: Get Image URL
+      id: get_image_url
+      run: echo "::set-output name=url::https://raw.githubusercontent.com/Hutlaw/hutlaw.github.io/main/images/pfp.webp"
+
+    - name: Update Profile Picture
+      env:
+        GITHUB_TOKEN: ${{ secrets.APFPU }}
+      run: |
+        python - << EOF
+        import requests
+
+        headers = {
+            "Authorization": f"token ${{ env.GITHUB_TOKEN }}",
+            "Accept": "application/vnd.github.v3+json"
+        }
+
+        image_url = "${{ steps.get_image_url.outputs.url }}"
+
+        # Fetch the image data
+        image_data = requests.get(image_url).content
+
+        # Upload the image to GitHub
+        response = requests.put(
+            "https://api.github.com/user/avatar",
+            headers=headers,
+            data=image_data,
+        )
+
+        if response.status_code == 204:
+            print("Profile picture updated successfully.")
+        else:
+            print(f"Failed to update profile picture. Status code: {response.status_code}")
+        EOF
