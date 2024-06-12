@@ -2,10 +2,12 @@
     font-family: 'HutlawStyle';
     src: url('fonts/HutlawStyle-Regular.otf') format('opentype'),
          url('fonts/HutlawStyle-Regular.ttf') format('truetype');
-    font-weight: ');
+    font-weight: normal;
+    font-style: normal;
+}
 
 body {
-    font-family: 'Comfortaa', sans-serif;
+    font-family: 'HutlawStyle', sans-serif;
     color: #e1e1e1;
     background-color: #000;
     margin: 0;
