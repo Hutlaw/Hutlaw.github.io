@@ -1,0 +1,19 @@
+name: Update GitHub Profile Picture
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-profile-picture:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Update GitHub Profile Picture
+      run: |
+        IMAGE_URL="https://raw.githubusercontent.com/Hutlaw/hutlaw.github.io/main/images/pfp.webp"
+        curl -X PATCH -H "Authorization: token ${{ secrets.APFPUP }}" -d '{"avatar_url": "'"$IMAGE_URL"'"}' https://api.github.com/user
