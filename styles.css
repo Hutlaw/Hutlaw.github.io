@@ -1,4 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+@font-face {
+    font-family: 'HutlawStyle';
+    src: url('fonts/HutlawStyle-Regular.otf') format('opentype'),
+         url('fonts/HutlawStyle-Regular.ttf') format('truetype');
+    font-weight: ');
 
 body {
     font-family: 'Comfortaa', sans-serif;
