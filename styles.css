@@ -51,6 +51,16 @@ p {
     line-height: 1.6em;
 }
 
+a {
+    color: #FFDD55;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #FFE066;
+}
+
 .contact {
     font-weight: bold;
 }
