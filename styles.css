@@ -52,13 +52,13 @@ p {
 }
 
 a {
-    color: #FF5733;
+    color: #C3B1E1;
     text-decoration: none;
     transition: color 0.3s;
 }
 
 a:hover {
-    color: #FF5733;
+    color: #C3B1E1;
 }
 
 .contact {
