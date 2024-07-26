@@ -3,11 +3,11 @@ const showProfilePicture = 1;
 const showPfpNotice = 1;
 
 function toggleProfilePicture() {
-    const profilePicture = document.querySelector('.profile-picture-container');
+    const profilePictureContainer = document.querySelector('.profile-picture-container');
     if (showProfilePicture === 0) {
-        profilePicture.classList.add('hidden');
+        profilePictureContainer.classList.add('hidden');
     } else {
-        profilePicture.classList.remove('hidden');
+        profilePictureContainer.classList.remove('hidden');
     }
 }
 
