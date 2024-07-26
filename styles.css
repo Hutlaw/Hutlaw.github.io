@@ -41,13 +41,35 @@ header h1 {
 .profile-picture::before {
     content: '';
     position: absolute;
-    top: -15px;
-    left: -15px;
-    width: calc(100% + 30px);
-    height: calc(100% + 30px);
+    top: -20px;
+    left: -20px;
+    width: calc(100% + 40px);
+    height: calc(100% + 40px);
     border: 5px solid transparent;
     border-radius: 50%;
-    background: conic-gradient(from 0deg, #FFD700 0%, #FFD700 12.5%, transparent 12.5%, transparent 25%, #FFD700 25%, #FFD700 37.5%, transparent 37.5%, transparent 50%, #FFD700 50%, #FFD700 62.5%, transparent 62.5%, transparent 75%, #FFD700 75%, #FFD700 87.5%, transparent 87.5%, transparent);
+    background: conic-gradient(
+        from 0deg,
+        #FFD700 0%,
+        #FFD700 10%,
+        transparent 10%,
+        transparent 20%,
+        #FFD700 20%,
+        #FFD700 30%,
+        transparent 30%,
+        transparent 40%,
+        #FFD700 40%,
+        #FFD700 50%,
+        transparent 50%,
+        transparent 60%,
+        #FFD700 60%,
+        #FFD700 70%,
+        transparent 70%,
+        transparent 80%,
+        #FFD700 80%,
+        #FFD700 90%,
+        transparent 90%,
+        transparent 100%
+    );
     animation: rotate-rays 4s linear infinite;
     z-index: 0;
 }
