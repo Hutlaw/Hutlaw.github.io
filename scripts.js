@@ -1,7 +1,6 @@
 // settings
 const showProfilePicture = 1;
 const showPfpNotice = 1;
-const showPfpEffect = 1;
 
 function toggleProfilePicture() {
     const profilePicture = document.querySelector('.profile-picture');
@@ -21,17 +20,7 @@ function togglePfpNotice() {
     }
 }
 
-function togglePfpEffect() {
-    const profilePictureContainer = document.querySelector('.profile-picture-container');
-    if (showPfpEffect === 0) {
-        profilePictureContainer.classList.add('effect-hidden');
-    } else {
-        profilePictureContainer.classList.remove('effect-hidden');
-    }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     toggleProfilePicture();
     togglePfpNotice();
-    togglePfpEffect();
 });
