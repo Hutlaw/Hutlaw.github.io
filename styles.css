@@ -153,3 +153,7 @@ footer a:hover {
     color: #FFFFFF;
     margin: 10px 0;
 }
+
+.hidden {
+    display: none;
+}
