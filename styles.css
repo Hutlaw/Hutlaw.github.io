@@ -23,10 +23,57 @@ header h1 {
     color: #FFD700;
 }
 
-.profile-picture {
+.profile-picture-container {
+    position: relative;
     width: 150px;
     height: 150px;
+    margin: 0 auto;
+}
+
+.profile-picture {
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
+    position: relative;
+    z-index: 1;
+}
+
+.profile-picture::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 100%;
+    height: 100%;
+    border: 10px solid transparent;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #FFD700 25%, transparent 25%, transparent 50%, #FFD700 50%, #FFD700 75%, transparent 75%, transparent);
+    background-size: 100% 100%;
+    animation: rotate-rays 3s linear infinite;
+    z-index: 0;
+}
+
+@keyframes rotate-rays {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .profile-picture-container {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profile-picture::before {
+        top: -8px;
+        left: -8px;
+        border: 8px solid transparent;
+    }
 }
 
 main {
