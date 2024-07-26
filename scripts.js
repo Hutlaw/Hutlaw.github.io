@@ -3,7 +3,7 @@ const showProfilePicture = 1;
 const showPfpNotice = 1;
 
 function toggleProfilePicture() {
-    const profilePicture = document.querySelector('.profile-picture');
+    const profilePicture = document.querySelector('.profile-picture-container');
     if (showProfilePicture === 0) {
         profilePicture.classList.add('hidden');
     } else {
