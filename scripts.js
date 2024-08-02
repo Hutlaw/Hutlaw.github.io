@@ -1,6 +1,6 @@
 // settings
 const showProfilePicture = 1;
-const showPfpNotice = 1;
+const showPfpNotice = 0;
 
 function toggleProfilePicture() {
     const profilePictureContainer = document.querySelector('.profile-picture-container');
