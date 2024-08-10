@@ -178,11 +178,14 @@ footer a:hover {
     margin: 10px 0;
 }
 
-/* Fade effect class */
+/* Fade effect classes */
 .fade-in {
     opacity: 1;
 }
 
 .fade-out {
     opacity: 0;
+}
+.hidden {
+    display: none;
 }
