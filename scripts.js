@@ -46,6 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (enableTextFading === 1) {
         window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Run on load to check initial visibility
+        handleScroll();
     }
 });
