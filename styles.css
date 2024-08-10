@@ -12,6 +12,8 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
+    opacity: 0; /* Initially hidden for fade-in effect */
+    transition: opacity 1s ease-in-out; /* Fade effect for page load */
 }
 
 header {
@@ -106,6 +108,8 @@ main {
 
 main section {
     margin-bottom: 40px;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 1s ease-in-out; /* Smooth transition for fade effect */
 }
 
 h3 {
@@ -174,6 +178,11 @@ footer a:hover {
     margin: 10px 0;
 }
 
-.hidden {
-    display: none;
+/* Fade effect class */
+.fade-in {
+    opacity: 1;
+}
+
+.fade-out {
+    opacity: 0;
 }
