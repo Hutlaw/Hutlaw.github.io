@@ -12,8 +12,8 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
-    opacity: 0; /* Initially hidden for fade-in effect */
-    transition: opacity 1s ease-in-out; /* Fade effect for page load */
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
 }
 
 header {
@@ -84,7 +84,6 @@ header h1 {
     }
 }
 
-/* Responsive adjustments */
 @media (max-width: 600px) {
     .profile-picture-container {
         width: 120px;
@@ -108,8 +107,8 @@ main {
 
 main section {
     margin-bottom: 40px;
-    opacity: 0; /* Initially hidden */
-    transition: opacity 1s ease-in-out; /* Smooth transition for fade effect */
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
 }
 
 h3 {
@@ -151,6 +150,7 @@ footer {
     text-align: center;
     background-color: #007846;
     padding: 20px 10px;
+    position: relative;
 }
 
 footer p {
@@ -178,7 +178,26 @@ footer a:hover {
     margin: 10px 0;
 }
 
-/* Fade effect classes */
+/* Visitor Counter Styling */
+.visitor-counter {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 0.9em;
+    color: #E3E3E3;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+@media (max-width: 600px) {
+    .visitor-counter {
+        font-size: 0.8em;
+        padding: 4px 8px;
+    }
+}
+
 .fade-in {
     opacity: 1;
 }
@@ -186,6 +205,7 @@ footer a:hover {
 .fade-out {
     opacity: 0;
 }
+
 .hidden {
     display: none;
 }
