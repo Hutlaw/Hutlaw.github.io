@@ -20,7 +20,27 @@ function togglePfpNotice() {
     }
 }
 
+// Fade effect on scroll
+function handleScroll() {
+    const elements = document.querySelectorAll('section');
+    elements.forEach((element) => {
+        const rect = element.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            element.classList.add('fade-in');
+            element.classList.remove('fade-out');
+        } else {
+            element.classList.remove('fade-in');
+            element.classList.add('fade-out');
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Fade in on load
+    document.body.style.opacity = '1';
+
     toggleProfilePicture();
     togglePfpNotice();
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Run on load to check initial visibility
 });
