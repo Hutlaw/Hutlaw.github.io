@@ -53,6 +53,18 @@
             <h3>Current Focus & Goals</h3>
             <p>These days, I'm diving into software and web development, exploring new ways to create and innovate. My goals have broadened to include building user-friendly, functional, and aesthetically pleasing software and websites. I'm also looking forward to traveling the world, with Japan, Canada, and Bolivia high on my list of places to visit.</p>
         </section>
+
+        <section id="favorite-songs">
+            <h3>Favorite Songs</h3>
+            <ol class="songs-list">
+                <li><a href="#" class="song-link" data-id="7EkWXAI1wn8Ii883ecd9xr">Freaks</a> by Surf Curse</li>
+                <li><a href="#" class="song-link" data-id="3J7xAcSC9UGaJDANSUBJpy">2 Days into College</a> by Aimee Carty</li>
+                <li><a href="#" class="song-link" data-id="3w3y8KPTfNeOKPiqUTakBh">Locked Out of Heaven</a> by Bruno Mars</li>
+                <li><a href="#" class="song-link" data-id="19KGy6NwFOonrll286hDV8">Sorry Jack!</a> by Scratch21</li>
+                <li><a href="#" class="song-link" data-id="6RUKPb4LETWmmr3iAEQktW">Something Just Like This</a> by The Chainsmokers & Coldplay</li>
+            </ol>
+        </section>
+
         <section>
             <h3>Contact</h3>
             <p class="contact"><img class="contact-icon" src="images/discord.png" alt="Discord Icon"> Discord: <a href="">HutlaW</a></p>
@@ -61,13 +73,19 @@
     </main>
     <footer>
         <p class="pfp-notice">The profile picture image is not my intellectual property and is not owned by me.</p>
-        <p class="version-marker">Version 2.0.7</p>
+        <p class="version-marker">Version 2.0.9</p>
         <a href="https://github.com/Hutlaw/hutlaw.github.io" target="_blank">Github</a>
 
         <div class="visitor-counter">
             Visits: <span id="visitor-count">Having a skill issue rn. check back later</span>
         </div>
     </footer>
+
+    <div id="spotify-modal" class="hidden">
+        <div class="modal-content">
+            <iframe id="spotify-embed" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+    </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
@@ -108,6 +126,27 @@
                 document.getElementById('visitor-count').textContent = '0';
             }
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('spotify-modal');
+            const embed = document.getElementById('spotify-embed');
+            const links = document.querySelectorAll('.song-link');
+
+            links.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const songId = link.getAttribute('data-id');
+                    embed.src = `https://open.spotify.com/embed/track/${songId}`;
+                    modal.classList.remove('hidden');
+                });
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!modal.contains(event.target) && !event.target.classList.contains('song-link')) {
+                    modal.classList.add('hidden');
+                }
+            });
+        });
     </script>
     <script src="scripts.js"></script>
 </body>
