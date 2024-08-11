@@ -178,7 +178,6 @@ footer a:hover {
     margin: 10px 0;
 }
 
-/* Visitor Counter Styling */
 .visitor-counter {
     position: absolute;
     bottom: 10px;
@@ -208,4 +207,84 @@ footer a:hover {
 
 .hidden {
     display: none;
+}
+
+#favorite-songs {
+    margin-top: 40px;
+    text-align: left;
+}
+
+.songs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: song-counter;
+}
+
+.songs-list li {
+    margin: 10px 0;
+    font-size: 1.2em;
+    counter-increment: song-counter;
+    color: #FFFFFF;
+}
+
+.songs-list li::before {
+    content: counter(song-counter) ". ";
+    font-weight: bold;
+    color: #FFD700;
+}
+
+.song-link {
+    color: #9676CE;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.song-link:hover {
+    color: #FFC107;
+}
+
+#spotify-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 90%;
+}
+
+#spotify-modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+#spotify-embed {
+    border: none;
+    border-radius: 10px;
+    max-width: 100%;
+}
+
+@media (max-width: 600px) {
+    .modal-content {
+        width: 100%;
+    }
+
+    #spotify-embed {
+        width: 100%;
+        height: auto;
+    }
 }
