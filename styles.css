@@ -1,8 +1,6 @@
 @font-face {
     font-family: 'Dekko';
     src: url('fonts/Dekko-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
 }
 
 body {
@@ -12,7 +10,6 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
-    opacity: 0;
     transition: opacity 1s ease-in-out;
 }
 
@@ -23,6 +20,11 @@ header {
 header h1 {
     font-size: 2.5em;
     color: #FFD700;
+    transition: color 0.3s;
+}
+
+header h1:hover {
+    color: #FF5733;
 }
 
 .profile-picture-container {
@@ -36,8 +38,6 @@ header h1 {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    position: relative;
-    z-index: 1;
 }
 
 .profile-picture::before {
@@ -72,7 +72,6 @@ header h1 {
         transparent 100%
     );
     animation: rotate-rays 4s linear infinite;
-    z-index: 0;
 }
 
 @keyframes rotate-rays {
@@ -81,20 +80,6 @@ header h1 {
     }
     100% {
         transform: rotate(360deg);
-    }
-}
-
-@media (max-width: 600px) {
-    .profile-picture-container {
-        width: 120px;
-        height: 120px;
-    }
-
-    .profile-picture::before {
-        top: -10px;
-        left: -10px;
-        width: calc(100% + 20px);
-        height: calc(100% + 20px);
     }
 }
 
@@ -107,7 +92,6 @@ main {
 
 main section {
     margin-bottom: 40px;
-    opacity: 0;
     transition: opacity 1s ease-in-out;
 }
 
@@ -125,11 +109,12 @@ p {
 a {
     color: #9676CE;
     text-decoration: none;
-    transition: color 0.3s;
+    transition: color 0.3s, transform 0.3s;
 }
 
 a:hover {
-    color: #9676CE;
+    color: #FFC107;
+    transform: scale(1.05);
 }
 
 .contact {
@@ -150,7 +135,6 @@ footer {
     text-align: center;
     background-color: #007846;
     padding: 20px 10px;
-    position: relative;
 }
 
 footer p {
@@ -176,25 +160,6 @@ footer a:hover {
     font-size: 0.8em;
     color: #FFFFFF;
     margin: 10px 0;
-}
-
-.visitor-counter {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-size: 0.9em;
-    color: #E3E3E3;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 5px 10px;
-    border-radius: 5px;
-    z-index: 1000;
-}
-
-@media (max-width: 600px) {
-    .visitor-counter {
-        font-size: 0.8em;
-        padding: 4px 8px;
-    }
 }
 
 .fade-in {
@@ -250,7 +215,7 @@ footer a:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.9);
     padding: 20px;
     border-radius: 10px;
     z-index: 1000;
@@ -275,16 +240,37 @@ footer a:hover {
 #spotify-embed {
     border: none;
     border-radius: 10px;
-    max-width: 100%;
+    width: 100%;
+    height: 380px;
 }
 
 @media (max-width: 600px) {
     .modal-content {
         width: 100%;
+        height: auto;
     }
 
     #spotify-embed {
         width: 100%;
-        height: auto;
+        height: 300px;
     }
+}
+
+#back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #FF5733;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 1000;
+}
+
+#back-to-top.visible {
+    opacity: 1;
 }
