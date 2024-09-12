@@ -1,0 +1,94 @@
+body {
+    background-color: #8D133C;
+    color: #E3E3E3;
+    font-family: 'Dekko', sans-serif;
+}
+
+.profile-picture-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.profile-picture {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.profile-picture::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: calc(100% + 40px);
+    height: calc(100% + 40px);
+    border-radius: 50%;
+    background: conic-gradient(
+        from 0deg,
+        #FFD700 0%,
+        #FFD700 10%,
+        transparent 10%,
+        transparent 20%,
+        #FFD700 20%,
+        #FFD700 30%,
+        transparent 30%,
+        transparent 40%,
+        #FFD700 40%,
+        #FFD700 50%,
+        transparent 50%,
+        transparent 60%,
+        #FFD700 60%,
+        #FFD700 70%,
+        transparent 70%,
+        transparent 80%,
+        #FFD700 80%,
+        #FFD700 90%,
+        transparent 90%,
+        transparent 100%
+    );
+    animation: rotate-rays 4s linear infinite;
+}
+
+@keyframes rotate-rays {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#spotify-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 90%;
+}
+
+#spotify-embed {
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    height: 380px;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.hidden {
+    display: none;
+}
