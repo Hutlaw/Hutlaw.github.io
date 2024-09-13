@@ -17,3 +17,10 @@ document.addEventListener('click', (event) => {
         embed.src = '';
     }
 });
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        modal.classList.add('hidden');
+        embed.src = '';
+    }
+});
