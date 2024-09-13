@@ -80,6 +80,12 @@ header, main, footer {
     align-items: center;
     justify-content: center;
     max-width: 90%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#spotify-modal:not(.hidden) {
+    opacity: 1;
 }
 
 #spotify-embed {
