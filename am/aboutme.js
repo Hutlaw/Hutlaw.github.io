@@ -8,12 +8,14 @@ links.forEach(link => {
         const songId = link.getAttribute('data-id');
         embed.src = `https://open.spotify.com/embed/track/${songId}`;
         modal.classList.remove('hidden');
+        modal.style.display = 'flex';
     });
 });
 
 document.addEventListener('click', (event) => {
     if (!modal.contains(event.target) && !event.target.classList.contains('song-link')) {
         modal.classList.add('hidden');
+        modal.style.display = 'none';
         embed.src = '';
     }
 });
@@ -21,6 +23,7 @@ document.addEventListener('click', (event) => {
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
         modal.classList.add('hidden');
+        modal.style.display = 'none';
         embed.src = '';
     }
 });
