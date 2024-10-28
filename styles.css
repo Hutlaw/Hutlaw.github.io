@@ -135,6 +135,7 @@ footer {
     text-align: center;
     background-color: #007846;
     padding: 20px 10px;
+    position: relative;
 }
 
 footer p {
@@ -273,4 +274,17 @@ footer a:hover {
 
 #back-to-top.visible {
     opacity: 1;
+}
+
+.footer-link {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-size: 0.8em;
+    color: #01301d;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    color: #08fc96;
 }
