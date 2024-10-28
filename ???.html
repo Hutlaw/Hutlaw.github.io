@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>???</title>
+  <link rel="stylesheet" href="w/styles.css">
+  <link rel="icon" href="images/weezer.png" type="image/png">
+</head>
+<body>
+  <header>
+    <h1>Welcome to the Weezer Zone</h1>
+    <p>This page questions its own existence... just like you do.</p>
+  </header>
+  <main>
+    <section id="existential-crisis">
+      <h2>Top Hits (If You Care)</h2>
+      <ul>
+        <li>Buddy Holly — "Timeless, but why are you still here?"</li>
+        <li>Say It Ain't So — "You're still reading this?"</li>
+        <li>Island in the Sun — "At least it's a vibe."</li>
+        <li>Hash Pipe — "Unanswered questions."</li>
+        <li>Pork and Beans — "Not as random as this page."</li>
+      </ul>
+    </section>
+    <section id="rivers-quote">
+      <h2>Rivers-Approved Wisdom (Maybe)</h2>
+      <p id="quote">"Contemplating the purpose of a purpose-free page."</p>
+    </section>
+    <button id="new-quote">Hit Me with Another 'Wisdom'</button>
+    <div id="floating-image">
+      <img src="images/weezer.png" alt="Weezer band floating aimlessly" />
+    </div>
+  </main>
+  <footer>
+    <p>© The Weezer Zone. Proudly pointless since today.</p>
+    <button onclick="window.location.href='https://hutlaw.xyz'">GO BACK!!</button>
+  </footer>
+  <script>
+    const quotes = [
+      "Contemplating the purpose of a purpose-free page.",
+      "You’re reading this? Really?",
+      "This page won't make you more productive, you know.",
+      "Even Rivers Cuomo would probably question this.",
+      "Somewhere, Weezer is facepalming.",
+      "Consider this page your break from reality.",
+      "If you’ve come this far, you might as well stay.",
+      "When in doubt, Weezer on.",
+      "The answers you seek are not here...but Weezer is.",
+      "If this page was any more pointless, it’d be a new genre.",
+      "If a Weezer lyric falls in a forest, does anyone feel it?",
+      "Reality is just an illusion, but Weezer is forever.",
+      "Some questions are better left unanswered. Just like why this page exists.",
+      "Why do we feel nostalgia for a time we weren't alive for? Is that the Weezer effect?",
+      "Maybe Weezer is just a state of mind.",
+      "Existence is subjective; Weezer is absolute.",
+      "What is Weezer, if not a reflection of our inner turmoil?",
+      "If life has no meaning, does this page still need a purpose?",
+      "Can one live a fulfilling life without Weezer? Uncertain.",
+      "You can refresh the page, but you can't refresh existence.",
+      "Does Weezer understand us better than we understand ourselves?",
+      "A page without a purpose is...actually still a page.",
+      "Question everything. Then question it again with a Weezer song in the background.",
+      "Is this page art? Or is art just a page?",
+      "If Weezer didn't exist, would we have had to invent them?",
+      "In a parallel universe, Weezer is a philosophy lecture.",
+      "Is there such a thing as Weezer enlightenment?",
+      "Music fades; Weezer remains.",
+      "Is reading these quotes more productive than contemplating the meaning of existence?",
+      "Why pursue meaning when we have Weezer?",
+      "The journey is more important than the destination, unless that destination is Weezer.",
+      "Is Weezer the sound of human nostalgia?",
+      "To Weezer or not to Weezer, that is the question.",
+      "We’re all just notes in Weezer’s song.",
+      "In the beginning, there was silence. Then there was Weezer.",
+      "Some things can’t be explained, like Weezer’s influence or this page’s purpose.",
+      "Sometimes I think this page understands me better than my friends do.",
+      "Every click brings you no closer to understanding... just like life.",
+      "Is it strange to be comforted by a page with no point?",
+      "The only thing this page truly offers is confusion.",
+      "If Weezer lyrics are our guide, where exactly are we headed?",
+      "Can an empty page inspire? If it's about Weezer, yes.",
+      "This page is pointless, but so are most things... at least this one has Weezer.",
+      "Is this content, or is content merely a label we give to distractions?",
+      "Perhaps you’re here to feel less alone. Perhaps Weezer is the answer."
+    ];
+    const quoteElement = document.getElementById("quote");
+    const newQuoteButton = document.getElementById("new-quote");
+    newQuoteButton.addEventListener("click", () => {
+      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      quoteElement.textContent = randomQuote;
+    });
+  </script>
+</body>
+</html>
