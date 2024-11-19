@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'HutlawStyle';
-  src: url('./fonts/HutlawStyle-Regular.ttf') format('truetype');
+  src: url('/fonts/HutlawStyle-Regular.ttf') format('truetype');
 }
 
 body {
