@@ -4,6 +4,8 @@ let currentIndex = 0;
 const starsCanvas = document.getElementById('stars');
 const starsCtx = starsCanvas.getContext('2d');
 let stars = [];
+let touchStartY = 0;
+let touchEndY = 0;
 
 function resizeCanvas() {
   starsCanvas.width = window.innerWidth;
@@ -59,6 +61,23 @@ function generateStars() {
   }
 }
 
+function handleTouchStart(event) {
+  touchStartY = event.touches[0].clientY;
+}
+
+function handleTouchEnd(event) {
+  touchEndY = event.changedTouches[0].clientY;
+  const swipeDistance = touchStartY - touchEndY;
+
+  if (Math.abs(swipeDistance) > 50) {
+    if (swipeDistance > 0) {
+      rotateBubbles('down');
+    } else {
+      rotateBubbles('up');
+    }
+  }
+}
+
 let scrollTimeout;
 window.addEventListener('wheel', (event) => {
   if (scrollTimeout) return;
@@ -69,6 +88,9 @@ window.addEventListener('wheel', (event) => {
     scrollTimeout = null;
   }, 500);
 });
+
+window.addEventListener('touchstart', handleTouchStart);
+window.addEventListener('touchend', handleTouchEnd);
 
 window.addEventListener('resize', () => {
   resizeCanvas();
