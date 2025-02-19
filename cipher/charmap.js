@@ -26,6 +26,72 @@ resizeCanvas();
 generateStars();
 drawStars();
 window.addEventListener('resize', () => { resizeCanvas(); generateStars(); });
+const bubbles = document.querySelectorAll('.bubble');
+let currentIndex = 0;
+let touchStartY = 0;
+let touchEndY = 0;
+function initializeBubbles() {
+  if (bubbles.length === 2) {
+    bubbles[0].classList.add('middle');
+    bubbles[1].classList.add('bottom');
+  } else {
+    bubbles.forEach((bubble, index) => {
+      if (index === 0) bubble.classList.add('middle');
+      else if (index === 1) bubble.classList.add('bottom');
+      else bubble.classList.add('top');
+    });
+  }
+}
+function rotateBubbles(direction) {
+  if (bubbles.length === 2) {
+    bubbles[0].classList.remove('middle','top','bottom');
+    bubbles[1].classList.remove('middle','top','bottom');
+    if (direction === 'down') {
+      currentIndex = 1;
+      bubbles[0].classList.add('top');
+      bubbles[1].classList.add('middle');
+    } else {
+      currentIndex = 0;
+      bubbles[0].classList.add('middle');
+      bubbles[1].classList.add('bottom');
+    }
+    return;
+  }
+  bubbles.forEach(bubble => bubble.classList.remove('top','middle','bottom'));
+  if (direction === 'down') {
+    currentIndex = (currentIndex + 1) % bubbles.length;
+  } else {
+    currentIndex = (currentIndex - 1 + bubbles.length) % bubbles.length;
+  }
+  const topIndex = (currentIndex - 1 + bubbles.length) % bubbles.length;
+  const bottomIndex = (currentIndex + 1) % bubbles.length;
+  bubbles[topIndex].classList.add('top');
+  bubbles[currentIndex].classList.add('middle');
+  bubbles[bottomIndex].classList.add('bottom');
+}
+function handleTouchStart(event) {
+  touchStartY = event.touches[0].clientY;
+}
+function handleTouchEnd(event) {
+  touchEndY = event.changedTouches[0].clientY;
+  const swipeDistance = touchStartY - touchEndY;
+  if (Math.abs(swipeDistance) > 50) {
+    if (swipeDistance > 0) {
+      rotateBubbles('down');
+    } else {
+      rotateBubbles('up');
+    }
+  }
+}
+let scrollTimeout;
+window.addEventListener('wheel', event => {
+  if (scrollTimeout) return;
+  rotateBubbles(event.deltaY > 0 ? 'down' : 'up');
+  scrollTimeout = setTimeout(() => { scrollTimeout = null; }, 500);
+});
+window.addEventListener('touchstart', handleTouchStart);
+window.addEventListener('touchend', handleTouchEnd);
+initializeBubbles();
 const encodingTable = {
   'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'g': 6, 'h': 7, 'i': 8, 'j': 9, 'k': 11, 'l': 12,
   'm': 13, 'n': 14, 'o': 15, 'p': 16, 'q': 17, 'r': 18, 's': 19, 't': 21, 'u': 22, 'v': 23, 'w': 24,
