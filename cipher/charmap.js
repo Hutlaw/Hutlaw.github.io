@@ -26,6 +26,7 @@ resizeCanvas();
 generateStars();
 drawStars();
 window.addEventListener('resize', () => { resizeCanvas(); generateStars(); });
+window.addEventListener('touchmove', e => { e.preventDefault(); }, {passive: false});
 const bubbles = document.querySelectorAll('.bubble');
 let currentIndex = 0;
 let touchStartY = 0;
@@ -46,23 +47,18 @@ function rotateBubbles(direction) {
   if (bubbles.length === 2) {
     bubbles[0].classList.remove('middle','top','bottom');
     bubbles[1].classList.remove('middle','top','bottom');
-    if (direction === 'down') {
-      currentIndex = 1;
-      bubbles[0].classList.add('top');
-      bubbles[1].classList.add('middle');
-    } else {
-      currentIndex = 0;
+    currentIndex = direction === 'down' ? (currentIndex === 0 ? 1 : 0) : (currentIndex === 1 ? 0 : 1);
+    if (currentIndex === 0) {
       bubbles[0].classList.add('middle');
       bubbles[1].classList.add('bottom');
+    } else {
+      bubbles[0].classList.add('top');
+      bubbles[1].classList.add('middle');
     }
     return;
   }
   bubbles.forEach(bubble => bubble.classList.remove('top','middle','bottom'));
-  if (direction === 'down') {
-    currentIndex = (currentIndex + 1) % bubbles.length;
-  } else {
-    currentIndex = (currentIndex - 1 + bubbles.length) % bubbles.length;
-  }
+  currentIndex = direction === 'down' ? (currentIndex + 1) % bubbles.length : (currentIndex - 1 + bubbles.length) % bubbles.length;
   const topIndex = (currentIndex - 1 + bubbles.length) % bubbles.length;
   const bottomIndex = (currentIndex + 1) % bubbles.length;
   bubbles[topIndex].classList.add('top');
@@ -76,11 +72,7 @@ function handleTouchEnd(event) {
   touchEndY = event.changedTouches[0].clientY;
   const swipeDistance = touchStartY - touchEndY;
   if (Math.abs(swipeDistance) > 50) {
-    if (swipeDistance > 0) {
-      rotateBubbles('down');
-    } else {
-      rotateBubbles('up');
-    }
+    rotateBubbles(swipeDistance > 0 ? 'down' : 'up');
   }
 }
 let scrollTimeout;
@@ -91,7 +83,6 @@ window.addEventListener('wheel', event => {
 });
 window.addEventListener('touchstart', handleTouchStart);
 window.addEventListener('touchend', handleTouchEnd);
-initializeBubbles();
 const encodingTable = {
   'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'g': 6, 'h': 7, 'i': 8, 'j': 9, 'k': 11, 'l': 12,
   'm': 13, 'n': 14, 'o': 15, 'p': 16, 'q': 17, 'r': 18, 's': 19, 't': 21, 'u': 22, 'v': 23, 'w': 24,
@@ -107,7 +98,7 @@ function encodeMessage() {
   let input = document.getElementById("message").value.toLowerCase();
   let encodedMessage = "";
   for (let char of input) {
-    if (char in encodingTable) { encodedMessage += encodingTable[char] + "0"; } else { encodedMessage += char; }
+    encodedMessage += char in encodingTable ? encodingTable[char] + "0" : char;
   }
   document.getElementById("encoded").value = encodedMessage.trim();
 }
@@ -116,7 +107,8 @@ function decodeMessage() {
   let decodedMessage = "";
   let parts = encodedInput.split("0").filter(part => part !== "");
   for (let part of parts) {
-    if (part in decodingTable) { decodedMessage += decodingTable[part]; } else { decodedMessage += "?"; }
+    decodedMessage += part in decodingTable ? decodingTable[part] : "?";
   }
   document.getElementById("decoded").value = decodedMessage;
 }
+initializeBubbles();
