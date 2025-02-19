@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://hutlaw.github.io/images/pfp.png" type="image/png">
+  <link rel="stylesheet" href="charmap.css">
+  <title>CharMap Encoder & Decoder</title>
+  <meta property="og:title" content="CharMap Encoder & Decoder">
+  <meta property="og:description" content="Custom Message Encoder & Decoder">
+  <meta name="description" content="Encode and decode messages using a custom character map.">
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <div class="bubble-container">
+    <div class="bubble">
+      <h1>Encoder</h1>
+      <label for="message">Enter Message:</label>
+      <textarea id="message" placeholder="Type your message..."></textarea>
+      <button onclick="encodeMessage()">Encode</button>
+      <label for="encoded">Encoded Message:</label>
+      <textarea id="encoded" readonly></textarea>
+    </div>
+    <div class="bubble">
+      <h1>Decoder</h1>
+      <label for="encodedInput">Enter Encoded Message:</label>
+      <textarea id="encodedInput" placeholder="Paste encoded message..."></textarea>
+      <button onclick="decodeMessage()">Decode</button>
+      <label for="decoded">Decoded Message:</label>
+      <textarea id="decoded" readonly></textarea>
+    </div>
+  </div>
+  <script src="charmap.js"></script>
+</body>
+</html>
