@@ -1,0 +1,71 @@
+@font-face {
+  font-family: 'HutlawStyle';
+  src: url('fonts/HutlawStyle-Regular.ttf') format('truetype');
+}
+body {
+  margin: 0;
+  overflow: hidden;
+  background: radial-gradient(circle, #0c1445, #030716);
+  color: white;
+  font-family: 'HutlawStyle', sans-serif;
+}
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.bubble-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+}
+.bubble {
+  width: 80%;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+h1 {
+  margin-bottom: 20px;
+}
+label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 1.2em;
+}
+textarea {
+  width: 100%;
+  height: 80px;
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: none;
+  resize: none;
+}
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+button:hover {
+  background-color: #0056b3;
+}
