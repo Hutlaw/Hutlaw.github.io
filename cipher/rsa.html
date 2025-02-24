@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://hutlaw.github.io/images/pfp.png" type="image/png">
+  <link rel="stylesheet" href="rsa.css">
+  <title>RSA Cipher</title>
+  <meta property="og:title" content="RSA Cipher">
+  <meta property="og:description" content="Encode and decode messages using RSA encryption">
+  <meta name="description" content="Encode and decode messages using RSA encryption with public and private keys.">
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <div class="bubble-container">
+    <div class="bubble">
+      <h1>RSA Cipher</h1>
+      <p>Use public key (e, n) to encrypt and private key (d, n) to decrypt messages.</p>
+      <button onclick="location.href='https://hutlaw.xyz/cipher/main.html'">Back to Main</button>
+    </div>
+    <div class="bubble">
+      <h1>Encoder</h1>
+      <label for="rsaMessage">Enter Message:</label>
+      <textarea id="rsaMessage" placeholder="Type your message..."></textarea>
+      <label for="publicE">Enter Public Exponent (e):</label>
+      <input type="text" id="publicE" placeholder="Public exponent" />
+      <label for="publicN">Enter Modulus (n):</label>
+      <input type="text" id="publicN" placeholder="Modulus" />
+      <button onclick="rsaEncryptMessage()">Encrypt</button>
+      <label for="rsaEncrypted">Encrypted Message:</label>
+      <textarea id="rsaEncrypted" readonly></textarea>
+    </div>
+    <div class="bubble">
+      <h1>Decoder</h1>
+      <label for="rsaCiphertext">Enter Encrypted Message:</label>
+      <textarea id="rsaCiphertext" placeholder="Paste encrypted message..."></textarea>
+      <label for="privateD">Enter Private Exponent (d):</label>
+      <input type="text" id="privateD" placeholder="Private exponent" />
+      <label for="privateN">Enter Modulus (n):</label>
+      <input type="text" id="privateN" placeholder="Modulus" />
+      <button onclick="rsaDecryptMessage()">Decrypt</button>
+      <label for="rsaDecrypted">Decrypted Message:</label>
+      <textarea id="rsaDecrypted" readonly></textarea>
+    </div>
+  </div>
+  <script src="rsa.js"></script>
+</body>
+</html>
