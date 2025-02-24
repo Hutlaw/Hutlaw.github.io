@@ -82,9 +82,7 @@ function handleTouchEnd(event) {
 let scrollTimeout;
 window.addEventListener('wheel', event => {
   if (scrollTimeout) return;
-
   rotateBubbles(event.deltaY > 0 ? 'down' : 'up');
-
   scrollTimeout = setTimeout(() => {
     scrollTimeout = null;
   }, 500);
