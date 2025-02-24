@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://hutlaw.github.io/images/pfp.png" type="image/png">
+  <link rel="stylesheet" href="signal.css">
+  <title>Signal Protocol Cipher</title>
+  <meta property="og:title" content="Signal Protocol Cipher">
+  <meta property="og:description" content="Encrypt and decrypt messages using a simulated Signal Protocol">
+  <meta name="description" content="Encrypt and decrypt messages using a simulated Signal Protocol encryption scheme.">
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <div class="bubble-container">
+    <div class="bubble">
+      <h1>Signal Protocol Cipher</h1>
+      <p>This demo simulates Signal Protocol encryption using ECDH and AES‑GCM. First, generate your key pair. Then use your private key and a recipient’s public key to derive a shared secret and encrypt your message. (Note: This is a simplified simulation.)</p>
+      <button onclick="location.href='https://hutlaw.xyz/cipher/main.html'">Back to Main</button>
+    </div>
+    <div class="bubble">
+      <h1>Key Generation</h1>
+      <button id="generateKeyButton" onclick="generateMyKeyPair()">Generate My Key Pair</button>
+      <label for="myPublicKey">My Public Key (JWK):</label>
+      <textarea id="myPublicKey" readonly placeholder="Your public key will appear here..."></textarea>
+    </div>
+    <div class="bubble">
+      <h1>Encoder</h1>
+      <label for="signalMessage">Enter Message:</label>
+      <textarea id="signalMessage" placeholder="Type your message..."></textarea>
+      <label for="recipientPublicKey">Recipient's Public Key (JWK):</label>
+      <textarea id="recipientPublicKey" placeholder="Paste recipient's public key here..."></textarea>
+      <button onclick="signalEncryptMessage()">Encrypt</button>
+      <label for="signalEncrypted">Encrypted Message (JSON):</label>
+      <textarea id="signalEncrypted" readonly></textarea>
+    </div>
+    <div class="bubble">
+      <h1>Decoder</h1>
+      <label for="signalCiphertext">Enter Encrypted Message (JSON):</label>
+      <textarea id="signalCiphertext" placeholder="Paste encrypted message here..."></textarea>
+      <label for="myPrivateKey">My Private Key (JWK):</label>
+      <textarea id="myPrivateKey" placeholder="Paste your private key here (if not auto‑filled)"></textarea>
+      <button onclick="signalDecryptMessage()">Decrypt</button>
+      <label for="signalDecrypted">Decrypted Message:</label>
+      <textarea id="signalDecrypted" readonly></textarea>
+    </div>
+    <div class="bubble">
+      <h1>Signal Explained</h1>
+      <p><strong>ECDH Key Exchange:</strong> Each party generates an elliptic curve key pair. By exchanging public keys and combining them with their own private key, both parties derive the same shared secret.</p>
+      <p><strong>AES‑GCM Encryption:</strong> The shared secret is used to derive a symmetric key that encrypts your message, ensuring confidentiality and integrity.</p>
+      <p>This demo mimics the initial key agreement of Signal. The real Signal Protocol adds many more layers (such as the Double Ratchet algorithm) for forward secrecy and future security.</p>
+    </div>
+  </div>
+  <script src="signal.js"></script>
+</body>
+</html>
