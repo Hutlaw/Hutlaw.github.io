@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://hutlaw.github.io/images/pfp.png" type="image/png">
+  <link rel="stylesheet" href="vigenere.css">
+  <title>Vigenère Cipher</title>
+  <meta property="og:title" content="Vigenère Cipher">
+  <meta property="og:description" content="Encode and decode messages using the Vigenère Cipher">
+  <meta name="description" content="Encode and decode messages using a Vigenère Cipher that requires a keyword of letters only.">
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <div class="bubble-container">
+    <div class="bubble">
+      <h1>Vigenère Cipher</h1>
+      <p>This cipher uses a keyword to determine letter shifts. Each letter in the message is shifted by the corresponding letter's value from the keyword. Non-letter characters remain unchanged.</p>
+    </div>
+    <div class="bubble">
+      <h1>Encoder</h1>
+      <label for="message">Enter Message:</label>
+      <textarea id="message" placeholder="Type your message..."></textarea>
+      <label for="encodeKeyword">Enter Keyword:</label>
+      <input type="text" id="encodeKeyword" placeholder="Letters only" />
+      <button onclick="encodeMessage()">Encode</button>
+      <label for="encoded">Encoded Message:</label>
+      <textarea id="encoded" readonly></textarea>
+    </div>
+    <div class="bubble">
+      <h1>Decoder</h1>
+      <label for="encodedInput">Enter Encoded Message:</label>
+      <textarea id="encodedInput" placeholder="Paste encoded message..."></textarea>
+      <label for="decodeKeyword">Enter Keyword:</label>
+      <input type="text" id="decodeKeyword" placeholder="Letters only" />
+      <button onclick="decodeMessage()">Decode</button>
+      <label for="decoded">Decoded Message:</label>
+      <textarea id="decoded" readonly></textarea>
+    </div>
+  </div>
+  <script src="vigenere.js"></script>
+</body>
+</html>
