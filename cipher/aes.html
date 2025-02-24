@@ -7,33 +7,33 @@
   <link rel="stylesheet" href="aes.css">
   <title>AES Cipher</title>
   <meta property="og:title" content="AES Cipher">
-  <meta property="og:description" content="Encrypt and decrypt messages using AES encryption">
-  <meta name="description" content="Encrypt and decrypt messages using AES encryption with a key.">
+  <meta property="og:description" content="Encrypt and decrypt messages using AES encryption.">
+  <meta name="description" content="Encrypt and decrypt messages using AES encryption with a 16-character key.">
 </head>
 <body>
+  <div class="static-bubble">
+    <h1>AES Cipher</h1>
+    <p>Encrypt and decrypt messages using AES-GCM. Key must be 16 characters long.</p>
+    <button onclick="location.href='https://hutlaw.xyz/cipher/main.html'">Back to Main</button>
+  </div>
   <div class="bubble-container">
     <div class="bubble">
-      <h1>AES Cipher</h1>
-      <p>Encrypt and decrypt messages using AES encryption.</p>
-      <button onclick="location.href='https://hutlaw.xyz/cipher/main.html'">Back to Main</button>
-    </div>
-    <div class="bubble">
-      <h1>Encoder</h1>
+      <h1>Encrypt</h1>
       <label for="aesMessage">Enter Message:</label>
       <textarea id="aesMessage" placeholder="Type your message..."></textarea>
-      <label for="aesKey">Enter Key (min 16 chars):</label>
-      <input type="text" id="aesKey" placeholder="Key" />
-      <button onclick="encryptAES()">Encrypt</button>
-      <label for="aesEncrypted">Encrypted Message:</label>
+      <label for="aesKeyEnc">Enter Key (16 characters):</label>
+      <input type="text" id="aesKeyEnc" placeholder="16-character key" maxlength="16">
+      <button onclick="aesEncrypt()">Encrypt</button>
+      <label for="aesEncrypted">Encrypted Message (Base64):</label>
       <textarea id="aesEncrypted" readonly></textarea>
     </div>
     <div class="bubble">
-      <h1>Decoder</h1>
-      <label for="aesCiphertext">Enter Encrypted Message:</label>
+      <h1>Decrypt</h1>
+      <label for="aesCiphertext">Enter Encrypted Message (Base64):</label>
       <textarea id="aesCiphertext" placeholder="Paste encrypted message..."></textarea>
-      <label for="aesKeyDec">Enter Key (min 16 chars):</label>
-      <input type="text" id="aesKeyDec" placeholder="Key" />
-      <button onclick="decryptAES()">Decrypt</button>
+      <label for="aesKeyDec">Enter Key (16 characters):</label>
+      <input type="text" id="aesKeyDec" placeholder="16-character key" maxlength="16">
+      <button onclick="aesDecrypt()">Decrypt</button>
       <label for="aesDecrypted">Decrypted Message:</label>
       <textarea id="aesDecrypted" readonly></textarea>
     </div>
