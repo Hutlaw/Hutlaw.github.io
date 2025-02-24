@@ -42,6 +42,14 @@
       <label for="rsaDecrypted">Decrypted Message:</label>
       <textarea id="rsaDecrypted" readonly></textarea>
     </div>
+    <div class="bubble">
+      <h1>RSA Explained</h1>
+      <p><strong>E (Public Exponent):</strong> A small exponent used for encryption.</p>
+      <p><strong>N (Modulus):</strong> The product of two large primes, used in both keys.</p>
+      <p><strong>D (Private Exponent):</strong> Computed as the modular inverse of E modulo φ(N), used for decryption.</p>
+      <p><strong>How to Get D:</strong> Compute φ(N) = (p–1)(q–1) for primes p and q, then find D such that (D × E) mod φ(N) = 1.</p>
+      <p><strong>Additional Info:</strong> RSA’s security relies on the difficulty of factoring N. Use large, random primes for robust security.</p>
+    </div>
   </div>
   <script src="rsa.js"></script>
 </body>
