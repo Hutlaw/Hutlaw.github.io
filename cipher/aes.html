@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://hutlaw.github.io/images/pfp.png" type="image/png">
+  <link rel="stylesheet" href="aes.css">
+  <title>AES Cipher</title>
+  <meta property="og:title" content="AES Cipher">
+  <meta property="og:description" content="Encrypt and decrypt messages using AES encryption">
+  <meta name="description" content="Encrypt and decrypt messages using AES encryption with a key.">
+</head>
+<body>
+  <div class="bubble-container">
+    <div class="bubble">
+      <h1>AES Cipher</h1>
+      <p>Encrypt and decrypt messages using AES encryption.</p>
+      <button onclick="location.href='https://hutlaw.xyz/cipher/main.html'">Back to Main</button>
+    </div>
+    <div class="bubble">
+      <h1>Encoder</h1>
+      <label for="aesMessage">Enter Message:</label>
+      <textarea id="aesMessage" placeholder="Type your message..."></textarea>
+      <label for="aesKey">Enter Key (min 16 chars):</label>
+      <input type="text" id="aesKey" placeholder="Key" />
+      <button onclick="encryptAES()">Encrypt</button>
+      <label for="aesEncrypted">Encrypted Message:</label>
+      <textarea id="aesEncrypted" readonly></textarea>
+    </div>
+    <div class="bubble">
+      <h1>Decoder</h1>
+      <label for="aesCiphertext">Enter Encrypted Message:</label>
+      <textarea id="aesCiphertext" placeholder="Paste encrypted message..."></textarea>
+      <label for="aesKeyDec">Enter Key (min 16 chars):</label>
+      <input type="text" id="aesKeyDec" placeholder="Key" />
+      <button onclick="decryptAES()">Decrypt</button>
+      <label for="aesDecrypted">Decrypted Message:</label>
+      <textarea id="aesDecrypted" readonly></textarea>
+    </div>
+  </div>
+  <script src="aes.js"></script>
+</body>
+</html>
