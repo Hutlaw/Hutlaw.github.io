@@ -44,12 +44,17 @@ canvas {
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
   opacity: 0;
   transition: opacity 0.5s, transform 0.5s, box-shadow 0.5s;
+  will-change: transform, opacity;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .bubble.middle {
   transform: translateY(0);
   opacity: 1;
   box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+  pointer-events: auto;
+  z-index: 2;
 }
 
 .bubble.top {
@@ -71,6 +76,10 @@ button {
   cursor: pointer;
   border-radius: 5px;
   margin-bottom: 15px;
+  position: relative;
+  z-index: 10;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 button:hover {
