@@ -2,6 +2,7 @@
   font-family: 'HutlawStyle';
   src: url('fonts/HutlawStyle-Regular.ttf') format('truetype');
 }
+
 body {
   margin: 0;
   overflow: hidden;
@@ -9,6 +10,7 @@ body {
   color: white;
   font-family: 'HutlawStyle', sans-serif;
 }
+
 canvas {
   position: fixed;
   top: 0;
@@ -17,12 +19,18 @@ canvas {
   height: 100%;
   z-index: -2;
 }
+
 .bubble-container {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
   width: 100%;
   overflow: hidden;
 }
+
 .bubble {
   position: absolute;
   width: 80%;
@@ -36,32 +44,24 @@ canvas {
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
   opacity: 0;
   transition: opacity 0.5s, transform 0.5s, box-shadow 0.5s;
-  left: 50%;
-  transform: translateX(-50%);
 }
+
 .bubble.middle {
-  transform: translate(-50%, 0);
+  transform: translateY(0);
   opacity: 1;
   box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
-  z-index: 3;
 }
+
 .bubble.top {
-  transform: translate(-50%, -120%);
+  transform: translateY(-120%);
   opacity: 0.5;
-  z-index: 1;
 }
+
 .bubble.bottom {
-  transform: translate(-50%, 120%);
+  transform: translateY(120%);
   opacity: 0.5;
-  z-index: 2;
 }
-h1 {
-  margin-bottom: 20px;
-}
-p {
-  margin-bottom: 20px;
-  font-size: 1em;
-}
+
 button {
   background-color: #007bff;
   color: white;
@@ -72,6 +72,7 @@ button {
   border-radius: 5px;
   margin-bottom: 15px;
 }
+
 button:hover {
   background-color: #0056b3;
 }
