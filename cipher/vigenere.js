@@ -16,7 +16,7 @@ function drawStars() {
   stars.forEach(star => {
     starsCtx.beginPath();
     starsCtx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-    starsCtx.fillStyle = `rgba(255, 255, 255, ${Math.sin(star.twinkle) * 0.5 + 0.5})`;
+    starsCtx.fillStyle = `rgba(255, 255, 255, ${Math.sin(star.twinkle)*0.5+0.5})`;
     starsCtx.fill();
     star.twinkle += star.speed;
   });
@@ -32,7 +32,7 @@ let currentIndex = 0;
 let touchStartY = 0;
 let touchEndY = 0;
 function initializeBubbles() {
-  bubbles.forEach(b => b.classList.remove('top', 'middle', 'bottom'));
+  bubbles.forEach(b => b.classList.remove('top','middle','bottom'));
   let topIndex = (currentIndex - 1 + bubbles.length) % bubbles.length;
   let bottomIndex = (currentIndex + 1) % bubbles.length;
   bubbles[currentIndex].classList.add('middle');
@@ -40,7 +40,7 @@ function initializeBubbles() {
   bubbles[bottomIndex].classList.add('bottom');
 }
 function rotateBubbles(direction) {
-  bubbles.forEach(b => b.classList.remove('top', 'middle', 'bottom'));
+  bubbles.forEach(b => b.classList.remove('top','middle','bottom'));
   currentIndex = direction === 'down' ? (currentIndex + 1) % bubbles.length : (currentIndex - 1 + bubbles.length) % bubbles.length;
   let topIndex = (currentIndex - 1 + bubbles.length) % bubbles.length;
   let bottomIndex = (currentIndex + 1) % bubbles.length;
