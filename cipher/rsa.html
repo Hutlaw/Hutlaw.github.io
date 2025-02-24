@@ -15,16 +15,16 @@
   <div class="bubble-container">
     <div class="bubble">
       <h1>RSA Cipher</h1>
-      <p>Use public key (e, n) to encrypt and private key (d, n) to decrypt messages.</p>
+      <p>Use your public key (E and N) to encrypt and your private key (D and N) to decrypt messages.</p>
       <button onclick="location.href='https://hutlaw.xyz/cipher/main.html'">Back to Main</button>
     </div>
     <div class="bubble">
       <h1>Encoder</h1>
       <label for="rsaMessage">Enter Message:</label>
       <textarea id="rsaMessage" placeholder="Type your message..."></textarea>
-      <label for="publicE">Enter Public Exponent (e):</label>
+      <label for="publicE">Enter Public Exponent (E):</label>
       <input type="text" id="publicE" placeholder="Public exponent" />
-      <label for="publicN">Enter Modulus (n):</label>
+      <label for="publicN">Enter Modulus (N):</label>
       <input type="text" id="publicN" placeholder="Modulus" />
       <button onclick="rsaEncryptMessage()">Encrypt</button>
       <label for="rsaEncrypted">Encrypted Message:</label>
@@ -34,9 +34,9 @@
       <h1>Decoder</h1>
       <label for="rsaCiphertext">Enter Encrypted Message:</label>
       <textarea id="rsaCiphertext" placeholder="Paste encrypted message..."></textarea>
-      <label for="privateD">Enter Private Exponent (d):</label>
+      <label for="privateD">Enter Private Exponent (D):</label>
       <input type="text" id="privateD" placeholder="Private exponent" />
-      <label for="privateN">Enter Modulus (n):</label>
+      <label for="privateN">Enter Modulus (N):</label>
       <input type="text" id="privateN" placeholder="Modulus" />
       <button onclick="rsaDecryptMessage()">Decrypt</button>
       <label for="rsaDecrypted">Decrypted Message:</label>
@@ -44,11 +44,12 @@
     </div>
     <div class="bubble">
       <h1>RSA Explained</h1>
-      <p><strong>E (Public Exponent):</strong> A small exponent used for encryption.</p>
-      <p><strong>N (Modulus):</strong> The product of two large primes, used in both keys.</p>
-      <p><strong>D (Private Exponent):</strong> Computed as the modular inverse of E modulo φ(N), used for decryption.</p>
-      <p><strong>How to Get D:</strong> Compute φ(N) = (p–1)(q–1) for primes p and q, then find D such that (D × E) mod φ(N) = 1.</p>
-      <p><strong>Additional Info:</strong> RSA’s security relies on the difficulty of factoring N. Use large, random primes for robust security.</p>
+      <p><strong>What is E?</strong> E is the public exponent – a small, easy-to-use number that helps encrypt your message.</p>
+      <p><strong>What is N (Modulus)?</strong> N is a big number created by multiplying two secret prime numbers. It’s part of both your public and private keys.</p>
+      <p><strong>What is D?</strong> D is the private exponent – your secret decryption key that lets you unlock messages encrypted with E and N.</p>
+      <p><strong>How do I get D?</strong> First, choose two large prime numbers and multiply them to get N. Then calculate φ(N) by multiplying one less than each prime. Finally, find D so that (D × E) mod φ(N) equals 1. D is your secret key!</p>
+      <p><strong>Why is RSA Secure?</strong> RSA’s security comes from the fact that it’s extremely hard to factor the large number N back into its two prime numbers. Without these primes, figuring out D is nearly impossible.</p>
+      <p><strong>Remember:</strong> Your public key (E, N) can be shared openly, but D must stay private – like a lock that anyone can close, but only you can open!</p>
     </div>
   </div>
   <script src="rsa.js"></script>
