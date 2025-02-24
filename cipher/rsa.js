@@ -16,7 +16,7 @@ function drawStars() {
   stars.forEach(star => {
     starsCtx.beginPath();
     starsCtx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-    starsCtx.fillStyle = `rgba(255, 255, 255, ${Math.sin(star.twinkle)*0.5+0.5})`;
+    starsCtx.fillStyle = `rgba(255,255,255,${Math.sin(star.twinkle)*0.5+0.5})`;
     starsCtx.fill();
     star.twinkle += star.speed;
   });
