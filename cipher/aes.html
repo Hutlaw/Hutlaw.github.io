@@ -3,39 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="https://hutlaw.github.io/images/pfp.png" type="image/png">
   <link rel="stylesheet" href="aes.css">
-  <title>AES Cipher</title>
-  <meta property="og:title" content="AES Cipher">
-  <meta property="og:description" content="Encrypt and decrypt messages using AES encryption.">
-  <meta name="description" content="Encrypt and decrypt messages using AES encryption with a 16-character key.">
+  <title>AES Encryption</title>
+  <meta property="og:title" content="AES Encryption">
+  <meta property="og:description" content="Encrypt and decrypt messages using AES encryption">
+  <meta name="description" content="Encrypt and decrypt messages using AES (Advanced Encryption Standard).">
 </head>
 <body>
-  <div class="static-bubble">
-    <h1>AES Cipher</h1>
-    <p>Encrypt and decrypt messages using AES-GCM. Key must be 16 characters long.</p>
-    <button onclick="location.href='https://hutlaw.xyz/cipher/main.html'">Back to Main</button>
-  </div>
   <div class="bubble-container">
     <div class="bubble">
-      <h1>Encrypt</h1>
+      <h1>AES Encryption</h1>
+      <p>Encrypt and decrypt messages using AES-128 (16-character key required).</p>
+      <button onclick="location.href='https://hutlaw.xyz/cipher/main.html'">Back to Main</button>
+    </div>
+    <div class="bubble">
+      <h1>Key Generator</h1>
+      <button onclick="generateRandomKey()">Generate Random Key</button>
+      <label for="aesKey">Key (16 characters):</label>
+      <input type="text" id="aesKey" placeholder="Enter 16-char key" maxlength="16">
+    </div>
+    <div class="bubble">
+      <h1>Encoder</h1>
       <label for="aesMessage">Enter Message:</label>
       <textarea id="aesMessage" placeholder="Type your message..."></textarea>
-      <label for="aesKeyEnc">Enter Key (16 characters):</label>
-      <input type="text" id="aesKeyEnc" placeholder="16-character key" maxlength="16">
-      <button onclick="aesEncrypt()">Encrypt</button>
+      <button onclick="aesEncryptMessage()">Encrypt</button>
       <label for="aesEncrypted">Encrypted Message (Base64):</label>
       <textarea id="aesEncrypted" readonly></textarea>
     </div>
     <div class="bubble">
-      <h1>Decrypt</h1>
+      <h1>Decoder</h1>
       <label for="aesCiphertext">Enter Encrypted Message (Base64):</label>
       <textarea id="aesCiphertext" placeholder="Paste encrypted message..."></textarea>
-      <label for="aesKeyDec">Enter Key (16 characters):</label>
-      <input type="text" id="aesKeyDec" placeholder="16-character key" maxlength="16">
-      <button onclick="aesDecrypt()">Decrypt</button>
+      <button onclick="aesDecryptMessage()">Decrypt</button>
       <label for="aesDecrypted">Decrypted Message:</label>
       <textarea id="aesDecrypted" readonly></textarea>
+    </div>
+    <div class="bubble">
+      <h1>AES Explained</h1>
+      <button onclick="toggleAESExplanation()">Show/Hide Explanation</button>
+      <div id="aesExplanation" style="display:none;">
+        <p>AES (Advanced Encryption Standard) is a symmetric encryption algorithm. In this demo we use AES-GCM mode with a 128-bit key (16 characters).</p>
+        <p>A random 12-byte initialization vector (IV) is generated during encryption and prepended to the ciphertext. During decryption, the IV is extracted and used to restore the original message.</p>
+        <p>Ensure your key is exactly 16 characters long. You can generate a random key with the button above.</p>
+      </div>
     </div>
   </div>
   <script src="aes.js"></script>
