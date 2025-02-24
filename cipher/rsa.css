@@ -1,0 +1,101 @@
+@font-face {
+  font-family: 'HutlawStyle';
+  src: url('fonts/HutlawStyle-Regular.ttf') format('truetype');
+}
+body {
+  margin: 0;
+  overflow: hidden;
+  background: radial-gradient(circle, #0c1445, #030716);
+  color: white;
+  font-family: 'HutlawStyle', sans-serif;
+}
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.bubble-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+.bubble {
+  position: absolute;
+  width: 80%;
+  max-width: 600px;
+  min-height: 60%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  opacity: 0;
+  transition: opacity 0.5s, transform 0.5s, box-shadow 0.5s;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.bubble.middle {
+  transform: translate(-50%, 0);
+  opacity: 1;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+  z-index: 3;
+}
+.bubble.top {
+  transform: translate(-50%, -120%);
+  opacity: 0.5;
+  z-index: 1;
+}
+.bubble.bottom {
+  transform: translate(-50%, 120%);
+  opacity: 0.5;
+  z-index: 2;
+}
+h1 {
+  margin-bottom: 20px;
+}
+p {
+  margin-bottom: 20px;
+  font-size: 1em;
+}
+label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 1.2em;
+}
+textarea {
+  width: 100%;
+  height: 80px;
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: none;
+  resize: none;
+}
+input[type="text"] {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: none;
+}
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+button:hover {
+  background-color: #0056b3;
+}
