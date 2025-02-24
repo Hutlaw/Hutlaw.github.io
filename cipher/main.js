@@ -13,7 +13,6 @@ function resizeCanvas() {
 }
 
 function initializeBubbles() {
-  // Set the first bubble as middle, the second as bottom, and all others as top
   bubbles.forEach((bubble, index) => {
     if (index === 0) bubble.classList.add('middle');
     else if (index === 1) bubble.classList.add('bottom');
