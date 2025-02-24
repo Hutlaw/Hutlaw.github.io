@@ -13,8 +13,30 @@ async function generateMyKeyPair() {
 }
 
 async function signalEncryptMessage() {
-  if (!myKeyPair) {
+  const myPrivateText = document.getElementById("myPrivateKey").value;
+  const myPublicText = document.getElementById("myPublicKey").value;
+  if (!myPrivateText || !myPublicText) {
     alert("Please generate your key pair first.");
+    return;
+  }
+  let senderPrivateKey, senderPublicKey;
+  try {
+    senderPrivateKey = await crypto.subtle.importKey(
+      "jwk",
+      JSON.parse(myPrivateText),
+      { name: "ECDH", namedCurve: "P-256" },
+      true,
+      ["deriveKey", "deriveBits"]
+    );
+    senderPublicKey = await crypto.subtle.importKey(
+      "jwk",
+      JSON.parse(myPublicText),
+      { name: "ECDH", namedCurve: "P-256" },
+      true,
+      []
+    );
+  } catch (e) {
+    alert("Failed to import your key pair. Please generate a new key pair.");
     return;
   }
   const message = document.getElementById("signalMessage").value;
@@ -38,7 +60,7 @@ async function signalEncryptMessage() {
   }
   const sharedKey = await crypto.subtle.deriveKey(
     { name: "ECDH", public: recipientPub },
-    myKeyPair.privateKey,
+    senderPrivateKey,
     { name: "AES-GCM", length: 256 },
     false,
     ["encrypt", "decrypt"]
@@ -57,7 +79,7 @@ async function signalEncryptMessage() {
     alert("Encryption failed.");
     return;
   }
-  const senderPubJwk = await crypto.subtle.exportKey("jwk", myKeyPair.publicKey);
+  const senderPubJwk = await crypto.subtle.exportKey("jwk", senderPublicKey);
   const encryptedObj = {
     senderPublicKey: senderPubJwk,
     iv: arrayBufferToBase64(iv.buffer),
@@ -96,25 +118,22 @@ async function signalDecryptMessage() {
     alert("Invalid sender public key in message.");
     return;
   }
-  let privKey;
   const myPrivText = document.getElementById("myPrivateKey").value;
-  if (myPrivText) {
-    try {
-      privKey = await crypto.subtle.importKey(
-        "jwk",
-        JSON.parse(myPrivText),
-        { name: "ECDH", namedCurve: "P-256" },
-        true,
-        ["deriveKey", "deriveBits"]
-      );
-    } catch (e) {
-      alert("Invalid private key provided.");
-      return;
-    }
-  } else if (myKeyPair) {
-    privKey = myKeyPair.privateKey;
-  } else {
-    alert("No private key available.");
+  if (!myPrivText) {
+    alert("Please provide your private key in the designated field.");
+    return;
+  }
+  let privKey;
+  try {
+    privKey = await crypto.subtle.importKey(
+      "jwk",
+      JSON.parse(myPrivText),
+      { name: "ECDH", namedCurve: "P-256" },
+      true,
+      ["deriveKey", "deriveBits"]
+    );
+  } catch (e) {
+    alert("Invalid private key provided.");
     return;
   }
   const sharedKey = await crypto.subtle.deriveKey(
