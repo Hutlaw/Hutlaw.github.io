@@ -81,6 +81,38 @@ function modPow(base, exponent, modulus) {
   }
   return result;
 }
+function gcd(a, b) {
+  a = BigInt(a);
+  b = BigInt(b);
+  while (b !== 0n) {
+    let temp = b;
+    b = a % b;
+    a = temp;
+  }
+  return a;
+}
+function modInverse(a, m) {
+  let m0 = BigInt(m), a0 = BigInt(a), x0 = 0n, x1 = 1n;
+  if (m0 === 1n) return 0n;
+  while (a0 > 1n) {
+    let q = a0 / m0;
+    let t = m0;
+    m0 = a0 % m0;
+    a0 = t;
+    t = x0;
+    x0 = x1 - q * x0;
+    x1 = t;
+  }
+  return (x1 + BigInt(m)) % BigInt(m);
+}
+function isPrime(num) {
+  num = parseInt(num);
+  if (isNaN(num) || num < 2) return false;
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) return false;
+  }
+  return true;
+}
 function rsaEncryptMessage() {
   let message = document.getElementById("rsaMessage").value;
   let e = document.getElementById("publicE").value;
@@ -113,5 +145,50 @@ function rsaDecryptMessage() {
     decrypted += String.fromCharCode(Number(m));
   }
   document.getElementById("rsaDecrypted").value = decrypted;
+}
+function calculateKeysFromInput() {
+  let pVal = document.getElementById("primeP").value;
+  let qVal = document.getElementById("primeQ").value;
+  let p = parseInt(pVal), q = parseInt(qVal);
+  if (!pVal || !qVal || isNaN(p) || isNaN(q) || !isPrime(p) || !isPrime(q) || p === q) {
+    alert("Please enter two distinct prime numbers for P and Q.");
+    return;
+  }
+  let n = p * q;
+  let phi = (p - 1) * (q - 1);
+  let candidates = [3, 5, 17, 257, 65537];
+  let e;
+  for (let cand of candidates) {
+    if (cand < phi && gcd(cand, phi) === 1n) { e = cand; break; }
+  }
+  if (!e) { alert("Failed to find suitable public exponent."); return; }
+  let d = modInverse(e, phi);
+  document.getElementById("publicE").value = e;
+  document.getElementById("publicN").value = n;
+  document.getElementById("privateD").value = d.toString();
+  document.getElementById("privateN").value = n;
+  alert("Keys generated from input primes.");
+}
+function generateRSAKeys() {
+  let primes = [11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97];
+  let p = primes[Math.floor(Math.random()*primes.length)];
+  let q = primes[Math.floor(Math.random()*primes.length)];
+  while(p === q) { q = primes[Math.floor(Math.random()*primes.length)]; }
+  let n = p * q;
+  let phi = (p - 1) * (q - 1);
+  let candidates = [3, 5, 17, 257, 65537];
+  let e;
+  for (let cand of candidates) {
+    if (cand < phi && gcd(cand, phi) === 1n) { e = cand; break; }
+  }
+  if (!e) { alert("Failed to generate keys."); return; }
+  let d = modInverse(e, phi);
+  document.getElementById("publicE").value = e;
+  document.getElementById("publicN").value = n;
+  document.getElementById("privateD").value = d.toString();
+  document.getElementById("privateN").value = n;
+  document.getElementById("primeP").value = p;
+  document.getElementById("primeQ").value = q;
+  alert("Keys auto-generated.");
 }
 initializeBubbles();
