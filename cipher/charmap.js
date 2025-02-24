@@ -8,7 +8,13 @@ function resizeCanvas() {
 function generateStars() {
   stars = [];
   for (let i = 0; i < 100; i++) {
-    stars.push({ x: Math.random() * starsCanvas.width, y: Math.random() * starsCanvas.height, size: Math.random() * 2, twinkle: Math.random() * Math.PI * 2, speed: Math.random() * 0.05 });
+    stars.push({ 
+      x: Math.random() * starsCanvas.width, 
+      y: Math.random() * starsCanvas.height, 
+      size: Math.random() * 2, 
+      twinkle: Math.random() * Math.PI * 2, 
+      speed: Math.random() * 0.05 
+    });
   }
 }
 function drawStars() {
@@ -25,14 +31,19 @@ function drawStars() {
 resizeCanvas();
 generateStars();
 drawStars();
-window.addEventListener('resize', () => { resizeCanvas(); generateStars(); });
+window.addEventListener('resize', () => { 
+  resizeCanvas(); 
+  generateStars(); 
+});
 window.addEventListener('touchmove', e => { e.preventDefault(); }, {passive: false});
-const bubbles = document.querySelectorAll('.bubble-container .bubble');
+
+/* Updated bubble rotation system to match main.js */
+const bubbles = document.querySelectorAll('.bubble'); // Changed selector here
 let currentIndex = 0;
 let touchStartY = 0;
 let touchEndY = 0;
 function initializeBubbles() {
-  bubbles.forEach(b => b.classList.remove('top','middle','bottom'));
+  bubbles.forEach(b => b.classList.remove('top', 'middle', 'bottom'));
   let topIndex = (currentIndex - 1 + bubbles.length) % bubbles.length;
   let bottomIndex = (currentIndex + 1) % bubbles.length;
   bubbles[currentIndex].classList.add('middle');
@@ -40,8 +51,9 @@ function initializeBubbles() {
   bubbles[bottomIndex].classList.add('bottom');
 }
 function rotateBubbles(direction) {
-  bubbles.forEach(b => b.classList.remove('top','middle','bottom'));
-  currentIndex = direction === 'down' ? (currentIndex + 1) % bubbles.length : (currentIndex - 1 + bubbles.length) % bubbles.length;
+  bubbles.forEach(b => b.classList.remove('top', 'middle', 'bottom'));
+  currentIndex = direction === 'down' ? (currentIndex + 1) % bubbles.length 
+                                      : (currentIndex - 1 + bubbles.length) % bubbles.length;
   let topIndex = (currentIndex - 1 + bubbles.length) % bubbles.length;
   let bottomIndex = (currentIndex + 1) % bubbles.length;
   bubbles[currentIndex].classList.add('middle');
@@ -66,6 +78,9 @@ window.addEventListener('wheel', event => {
 });
 window.addEventListener('touchstart', handleTouchStart);
 window.addEventListener('touchend', handleTouchEnd);
+initializeBubbles();
+
+/* --- Existing CharMap Encoding/Decoding functionality --- */
 const encodingTable = {
   'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'g': 6, 'h': 7, 'i': 8, 'j': 9, 'k': 11, 'l': 12,
   'm': 13, 'n': 14, 'o': 15, 'p': 16, 'q': 17, 'r': 18, 's': 19, 't': 21, 'u': 22, 'v': 23, 'w': 24,
@@ -77,6 +92,7 @@ const encodingTable = {
   'á': 77, 'é': 78, 'í': 79, 'ó': 80, 'ú': 81, 'à': 82, 'è': 83, 'ç': 84, 'ñ': 85, 'ö': 86, 'ü': 87
 };
 const decodingTable = Object.fromEntries(Object.entries(encodingTable).map(([k,v]) => [v,k]));
+
 function encodeMessage() {
   let input = document.getElementById("message").value.toLowerCase();
   let encodedMessage = "";
@@ -85,6 +101,7 @@ function encodeMessage() {
   }
   document.getElementById("encoded").value = encodedMessage.trim();
 }
+
 function decodeMessage() {
   let encodedInput = document.getElementById("encodedInput").value.trim();
   let decodedMessage = "";
@@ -94,4 +111,3 @@ function decodeMessage() {
   }
   document.getElementById("decoded").value = decodedMessage;
 }
-initializeBubbles();
