@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://hutlaw.github.io/images/pfp.png" type="image/png">
+  <link rel="stylesheet" href="ecc.css">
+  <title>ECC Cipher</title>
+  <meta property="og:title" content="ECC Cipher">
+  <meta property="og:description" content="Encrypt and decrypt messages using ECC simulation">
+  <meta name="description" content="Encrypt and decrypt messages using a simplified ECC simulation.">
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <div class="bubble-container">
+    <div class="bubble">
+      <h1>ECC Cipher</h1>
+      <p>Secure your messages using Elliptic Curve Cryptography. This demo simulates ECC key generation and encryption.</p>
+      <button onclick="location.href='https://hutlaw.xyz/cipher/main.html'">Back to Main</button>
+    </div>
+    <div class="bubble">
+      <h1>Encoder</h1>
+      <label for="eccMessage">Enter Message:</label>
+      <textarea id="eccMessage" placeholder="Type your message..."></textarea>
+      <label for="publicX">Enter Public Key X:</label>
+      <input type="text" id="publicX" placeholder="Public key X">
+      <label for="publicY">Enter Public Key Y:</label>
+      <input type="text" id="publicY" placeholder="Public key Y">
+      <button onclick="eccEncryptMessage()">Encrypt</button>
+      <label for="eccEncrypted">Encrypted Message:</label>
+      <textarea id="eccEncrypted" readonly></textarea>
+    </div>
+    <div class="bubble">
+      <h1>Decoder</h1>
+      <label for="eccCiphertext">Enter Encrypted Message:</label>
+      <textarea id="eccCiphertext" placeholder="Paste encrypted message..."></textarea>
+      <label for="privateKey">Enter Private Key:</label>
+      <input type="text" id="privateKey" placeholder="Private key">
+      <button onclick="eccDecryptMessage()">Decrypt</button>
+      <label for="eccDecrypted">Decrypted Message:</label>
+      <textarea id="eccDecrypted" readonly></textarea>
+    </div>
+    <div class="bubble">
+      <h1>ECC Key Calculator</h1>
+      <label for="calcPrivateKey">Enter Private Key:</label>
+      <input type="text" id="calcPrivateKey" placeholder="Private key">
+      <button onclick="eccCalculateKeysFromInput()">Calculate Public Key</button>
+      <button onclick="eccGenerateKeys()">Auto Generate Keys</button>
+      <label for="calcPublicX">Calculated Public Key X:</label>
+      <input type="text" id="calcPublicX" readonly>
+      <label for="calcPublicY">Calculated Public Key Y:</label>
+      <input type="text" id="calcPublicY" readonly>
+    </div>
+    <div class="bubble">
+      <h1>ECC Explained</h1>
+      <p><strong>What is ECC?</strong> ECC stands for Elliptic Curve Cryptography. It uses points on a curve over a finite field to generate keys.</p>
+      <p><strong>Private Key:</strong> A secret number you choose.</p>
+      <p><strong>Public Key:</strong> Computed from the private key using fixed base values and modular arithmetic.</p>
+      <p><strong>Encryption:</strong> In this demo, encryption adds an offset (derived from the public key) to each character’s code.</p>
+      <p><strong>Decryption:</strong> Decryption subtracts that offset (recomputed from your private key) to recover the message.</p>
+      <p><strong>Note:</strong> This is a simplified simulation and is not secure for real use.</p>
+    </div>
+  </div>
+  <script src="ecc.js"></script>
+</body>
+</html>
