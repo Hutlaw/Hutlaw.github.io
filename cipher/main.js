@@ -1,69 +1,105 @@
+const bubbles = document.querySelectorAll('.bubble');
+let currentIndex = 0;
+
 const starsCanvas = document.getElementById('stars');
 const starsCtx = starsCanvas.getContext('2d');
 let stars = [];
+let touchStartY = 0;
+let touchEndY = 0;
+
 function resizeCanvas() {
   starsCanvas.width = window.innerWidth;
   starsCanvas.height = window.innerHeight;
 }
-function generateStars() {
-  stars = [];
-  for (let i = 0; i < 100; i++) {
-    stars.push({ x: Math.random() * starsCanvas.width, y: Math.random() * starsCanvas.height, size: Math.random() * 2, twinkle: Math.random() * Math.PI * 2, speed: Math.random() * 0.05 });
-  }
+
+function initializeBubbles() {
+  // Set the first bubble as middle, the second as bottom, and all others as top
+  bubbles.forEach((bubble, index) => {
+    if (index === 0) bubble.classList.add('middle');
+    else if (index === 1) bubble.classList.add('bottom');
+    else bubble.classList.add('top');
+  });
 }
+
+function rotateBubbles(direction) {
+  bubbles.forEach(bubble => bubble.classList.remove('top', 'middle', 'bottom'));
+
+  if (direction === 'down') {
+    currentIndex = (currentIndex + 1) % bubbles.length;
+  } else {
+    currentIndex = (currentIndex - 1 + bubbles.length) % bubbles.length;
+  }
+
+  const topIndex = (currentIndex - 1 + bubbles.length) % bubbles.length;
+  const bottomIndex = (currentIndex + 1) % bubbles.length;
+
+  bubbles[topIndex].classList.add('top');
+  bubbles[currentIndex].classList.add('middle');
+  bubbles[bottomIndex].classList.add('bottom');
+}
+
 function drawStars() {
   starsCtx.clearRect(0, 0, starsCanvas.width, starsCanvas.height);
   stars.forEach(star => {
     starsCtx.beginPath();
     starsCtx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-    starsCtx.fillStyle = `rgba(255, 255, 255, ${Math.sin(star.twinkle)*0.5+0.5})`;
+    starsCtx.fillStyle = `rgba(255, 255, 255, ${Math.sin(star.twinkle) * 0.5 + 0.5})`;
     starsCtx.fill();
     star.twinkle += star.speed;
   });
   requestAnimationFrame(drawStars);
 }
-resizeCanvas();
-generateStars();
-drawStars();
-window.addEventListener('resize', () => { resizeCanvas(); generateStars(); });
-window.addEventListener('touchmove', e => { e.preventDefault(); }, {passive: false});
-const bubbles = document.querySelectorAll('.bubble');
-let currentIndex = 0;
-let touchStartY = 0;
-let touchEndY = 0;
-function initializeBubbles() {
-  bubbles.forEach(b => b.classList.remove('top','middle','bottom'));
-  let topIndex = (currentIndex - 1 + bubbles.length) % bubbles.length;
-  let bottomIndex = (currentIndex + 1) % bubbles.length;
-  bubbles[currentIndex].classList.add('middle');
-  bubbles[topIndex].classList.add('top');
-  bubbles[bottomIndex].classList.add('bottom');
+
+function generateStars() {
+  stars = [];
+  for (let i = 0; i < 100; i++) {
+    stars.push({
+      x: Math.random() * starsCanvas.width,
+      y: Math.random() * starsCanvas.height,
+      size: Math.random() * 2,
+      twinkle: Math.random() * Math.PI * 2,
+      speed: Math.random() * 0.05,
+    });
+  }
 }
-function rotateBubbles(direction) {
-  bubbles.forEach(b => b.classList.remove('top','middle','bottom'));
-  currentIndex = direction === 'down' ? (currentIndex + 1) % bubbles.length : (currentIndex - 1 + bubbles.length) % bubbles.length;
-  let topIndex = (currentIndex - 1 + bubbles.length) % bubbles.length;
-  let bottomIndex = (currentIndex + 1) % bubbles.length;
-  bubbles[currentIndex].classList.add('middle');
-  bubbles[topIndex].classList.add('top');
-  bubbles[bottomIndex].classList.add('bottom');
-}
+
 function handleTouchStart(event) {
   touchStartY = event.touches[0].clientY;
 }
+
 function handleTouchEnd(event) {
   touchEndY = event.changedTouches[0].clientY;
-  let swipeDistance = touchStartY - touchEndY;
+  const swipeDistance = touchStartY - touchEndY;
+
   if (Math.abs(swipeDistance) > 50) {
-    rotateBubbles(swipeDistance > 0 ? 'down' : 'up');
+    if (swipeDistance > 0) {
+      rotateBubbles('down');
+    } else {
+      rotateBubbles('up');
+    }
   }
 }
+
 let scrollTimeout;
 window.addEventListener('wheel', event => {
   if (scrollTimeout) return;
+
   rotateBubbles(event.deltaY > 0 ? 'down' : 'up');
-  scrollTimeout = setTimeout(() => { scrollTimeout = null; }, 500);
+
+  scrollTimeout = setTimeout(() => {
+    scrollTimeout = null;
+  }, 500);
 });
+
 window.addEventListener('touchstart', handleTouchStart);
 window.addEventListener('touchend', handleTouchEnd);
+
+window.addEventListener('resize', () => {
+  resizeCanvas();
+  generateStars();
+});
+
+resizeCanvas();
+generateStars();
+drawStars();
 initializeBubbles();
