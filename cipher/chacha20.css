@@ -99,3 +99,10 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+@media (max-width: 600px) {
+  .bubble {
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 20px;
+  }
+}
