@@ -4,7 +4,7 @@
 }
 body {
   margin: 0;
-  overflow: hidden;
+  overflow: auto;
   background: radial-gradient(circle, #0c1445, #030716);
   color: white;
   font-family: 'HutlawStyle', sans-serif;
@@ -17,45 +17,25 @@ canvas {
   height: 100%;
   z-index: -2;
 }
-.bubble-container {
-  position: relative;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
+.content-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 .bubble {
-  position: absolute;
-  width: 80%;
-  max-width: 600px;
-  min-height: 60%;
   background: rgba(255,255,255,0.1);
   border: 2px solid rgba(255,255,255,0.6);
-  border-radius: 50px;
-  padding: 30px;
-  text-align: center;
-  box-shadow: 0 0 20px rgba(255,255,255,0.3);
-  opacity: 0;
-  transition: opacity 0.5s, transform 0.5s, box-shadow 0.5s;
-  left: 50%;
-  transform: translateX(-50%);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.5);
 }
-.bubble.middle {
-  transform: translate(-50%, 0);
-  opacity: 1;
-  box-shadow: 0 0 30px rgba(255,255,255,0.8);
-  z-index: 3;
+hr {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.3);
+  margin: 20px 0;
 }
-.bubble.top {
-  transform: translate(-50%, -120%);
-  opacity: 0.5;
-  z-index: 1;
-}
-.bubble.bottom {
-  transform: translate(-50%, 120%);
-  opacity: 0.5;
-  z-index: 2;
-}
-h1 {
+h1, h2 {
   margin-bottom: 20px;
 }
 p {
@@ -98,11 +78,4 @@ button {
 }
 button:hover {
   background-color: #0056b3;
-}
-@media (max-width: 600px) {
-  .bubble {
-    max-height: 90vh;
-    overflow-y: auto;
-    padding: 20px;
-  }
 }
