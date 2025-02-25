@@ -16,7 +16,7 @@ function drawStars() {
   stars.forEach(star => {
     starsCtx.beginPath();
     starsCtx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-    starsCtx.fillStyle = `rgba(255,255,255,${Math.sin(star.twinkle) * 0.5 + 0.5})`;
+    starsCtx.fillStyle = `rgba(255,255,255,${Math.sin(star.twinkle)*0.5+0.5})`;
     starsCtx.fill();
     star.twinkle += star.speed;
   });
@@ -26,13 +26,13 @@ resizeCanvas();
 generateStars();
 drawStars();
 window.addEventListener('resize', () => { resizeCanvas(); generateStars(); });
-window.addEventListener('touchmove', e => { e.preventDefault(); }, { passive: false });
+window.addEventListener('touchmove', e => { e.preventDefault(); }, {passive: false});
 const bubbles = document.querySelectorAll('.bubble');
 let currentIndex = 0;
 let touchStartY = 0;
 let touchEndY = 0;
 function initializeBubbles() {
-  bubbles.forEach(b => b.classList.remove('top', 'middle', 'bottom'));
+  bubbles.forEach(b => b.classList.remove('top','middle','bottom'));
   let topIndex = (currentIndex - 1 + bubbles.length) % bubbles.length;
   let bottomIndex = (currentIndex + 1) % bubbles.length;
   bubbles[currentIndex].classList.add('middle');
@@ -40,7 +40,7 @@ function initializeBubbles() {
   bubbles[bottomIndex].classList.add('bottom');
 }
 function rotateBubbles(direction) {
-  bubbles.forEach(b => b.classList.remove('top', 'middle', 'bottom'));
+  bubbles.forEach(b => b.classList.remove('top','middle','bottom'));
   currentIndex = direction === 'down' ? (currentIndex + 1) % bubbles.length : (currentIndex - 1 + bubbles.length) % bubbles.length;
   let topIndex = (currentIndex - 1 + bubbles.length) % bubbles.length;
   let bottomIndex = (currentIndex + 1) % bubbles.length;
@@ -189,4 +189,26 @@ function chacha20DecryptMessage() {
   let ciphertextBytes = hexToBytes(ciphertextHex);
   let decryptedBytes = chacha20Cipher(ciphertextBytes, keyBytes, counter, nonceBytes);
   document.getElementById("chacha20Decrypted").value = bytesToString(decryptedBytes);
+}
+function randomHex(length) {
+  let hex = "";
+  for (let i = 0; i < length; i++) {
+    hex += Math.floor(Math.random() * 16).toString(16);
+  }
+  return hex;
+}
+function chacha20GenerateKeys() {
+  let key = randomHex(64);
+  let nonce = randomHex(24);
+  let counter = 1;
+  document.getElementById("chacha20GenKey").value = key;
+  document.getElementById("chacha20GenNonce").value = nonce;
+  document.getElementById("chacha20GenCounter").value = counter;
+  document.getElementById("chacha20Key").value = key;
+  document.getElementById("chacha20Nonce").value = nonce;
+  document.getElementById("chacha20Counter").value = counter;
+  document.getElementById("chacha20KeyDec").value = key;
+  document.getElementById("chacha20NonceDec").value = nonce;
+  document.getElementById("chacha20CounterDec").value = counter;
+  alert("Keys auto-generated.");
 }
