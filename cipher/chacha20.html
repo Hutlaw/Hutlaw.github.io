@@ -47,6 +47,16 @@
       <textarea id="chacha20Decrypted" readonly></textarea>
     </div>
     <div class="bubble">
+      <h1>Key Autogenerator</h1>
+      <label for="chacha20GenKey">Generated Key (256-bit):</label>
+      <input type="text" id="chacha20GenKey" readonly>
+      <label for="chacha20GenNonce">Generated Nonce (96-bit):</label>
+      <input type="text" id="chacha20GenNonce" readonly>
+      <label for="chacha20GenCounter">Counter:</label>
+      <input type="text" id="chacha20GenCounter" readonly>
+      <button onclick="chacha20GenerateKeys()">Auto Generate Keys</button>
+    </div>
+    <div class="bubble">
       <h1>ChaCha20 Explained</h1>
       <p><strong>What is ChaCha20?</strong> ChaCha20 is a stream cipher that generates a pseudorandom keystream which is XORed with plaintext to produce ciphertext.</p>
       <p><strong>Key:</strong> A 256-bit (64 hex digit) key used to initialize the cipher.</p>
