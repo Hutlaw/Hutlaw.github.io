@@ -1,10 +1,19 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
 @font-face {
   font-family: 'HutlawStyle';
   src: url('fonts/HutlawStyle-Regular.ttf') format('truetype');
 }
 body {
   margin: 0;
-  overflow: auto;
+  overflow-y: auto;
   background: radial-gradient(circle, #0c1445, #030716);
   color: white;
   font-family: 'HutlawStyle', sans-serif;
@@ -18,9 +27,10 @@ canvas {
   z-index: -2;
 }
 .content-container {
-  padding: 20px;
+  width: 100%;
   max-width: 800px;
   margin: 0 auto;
+  padding: 20px;
 }
 .bubble {
   background: rgba(255,255,255,0.1);
@@ -29,6 +39,7 @@ canvas {
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0 0 20px rgba(255,255,255,0.5);
+  text-align: center;
 }
 hr {
   border: none;
@@ -46,11 +57,14 @@ label {
   display: block;
   margin: 10px 0 5px;
   font-size: 1.2em;
+  text-align: left;
 }
 textarea {
+  display: block;
   width: 100%;
+  max-width: 100%;
   height: 80px;
-  margin-bottom: 15px;
+  margin: 0 auto 15px auto;
   padding: 10px;
   font-size: 1em;
   border-radius: 5px;
@@ -58,9 +72,11 @@ textarea {
   resize: none;
 }
 input[type="text"] {
+  display: block;
   width: 100%;
+  max-width: 100%;
   height: 40px;
-  margin-bottom: 15px;
+  margin: 0 auto 15px auto;
   padding: 10px;
   font-size: 1em;
   border-radius: 5px;
