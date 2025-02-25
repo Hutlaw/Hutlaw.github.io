@@ -1,97 +1,17 @@
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-html, body {
-  height: 100%;
-  overflow-x: hidden;
-}
-
-@font-face {
-  font-family: 'HutlawStyle';
-  src: url('fonts/HutlawStyle-Regular.ttf') format('truetype');
-}
-body {
-  margin: 0;
-  overflow-y: auto;
-  background: radial-gradient(circle, #0c1445, #030716);
-  color: white;
-  font-family: 'HutlawStyle', sans-serif;
-}
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
-}
-.content-container {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-.bubble {
-  background: rgba(255,255,255,0.1);
-  border: 2px solid rgba(255,255,255,0.6);
-  border-radius: 20px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 0 20px rgba(255,255,255,0.5);
-  text-align: center;
-}
-hr {
-  border: none;
-  border-top: 1px solid rgba(255,255,255,0.3);
-  margin: 20px 0;
-}
-h1, h2 {
-  margin-bottom: 20px;
-}
-p {
-  margin-bottom: 20px;
-  font-size: 1em;
-}
-label {
-  display: block;
-  margin: 10px 0 5px;
-  font-size: 1.2em;
-  text-align: left;
-}
-textarea {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  height: 80px;
-  margin: 0 auto 15px auto;
-  padding: 10px;
-  font-size: 1em;
-  border-radius: 5px;
-  border: none;
-  resize: none;
-}
-input[type="text"] {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  height: 40px;
-  margin: 0 auto 15px auto;
-  padding: 10px;
-  font-size: 1em;
-  border-radius: 5px;
-  border: none;
-}
-button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  font-size: 1em;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-bottom: 15px;
-}
-button:hover {
-  background-color: #0056b3;
-}
+*,*::before,*::after {box-sizing:border-box; margin:0; padding:0;}
+html, body {height:100%; overflow-x:hidden;}
+@font-face {font-family:'HutlawStyle'; src:url('fonts/HutlawStyle-Regular.ttf') format('truetype');}
+body {margin:0; overflow-y:auto; background:radial-gradient(circle, #0c1445, #030716); color:white; font-family:'HutlawStyle', sans-serif; padding:20px;}
+canvas {position:fixed; top:0; left:0; width:100%; height:100%; z-index:-2;}
+.content-container {max-width:800px; margin:0 auto; padding:20px; overflow-y:auto;}
+.bubble {background:rgba(255,255,255,0.1); border:2px solid rgba(255,255,255,0.6); border-radius:20px; padding:20px; margin-bottom:20px; box-shadow:0 0 20px rgba(255,255,255,0.5); text-align:center; overflow:hidden;}
+hr {border:none; border-top:1px solid rgba(255,255,255,0.3); margin:20px 0;}
+h1, h2 {margin-bottom:20px; text-align:center;}
+p {margin-bottom:20px; font-size:1em; text-align:center;}
+label {display:block; margin:10px 0 5px; font-size:1.2em; text-align:left;}
+textarea {display:block; width:100%; max-width:100%; height:80px; margin:0 auto 15px; padding:10px; font-size:1em; border-radius:5px; border:none; resize:none; background:rgba(255,255,255,0.2); color:white;}
+input[type="text"] {display:block; width:100%; max-width:100%; height:40px; margin:0 auto 15px; padding:10px; font-size:1em; border-radius:5px; border:none; background:rgba(255,255,255,0.2); color:white;}
+button {background-color:#007bff; color:white; padding:10px 20px; border:none; font-size:1em; cursor:pointer; border-radius:5px; margin-bottom:15px; display:block; margin-left:auto; margin-right:auto;}
+button:hover {background-color:#0056b3;}
+@media (max-width:768px){.content-container {width:90%; padding:10px;}}
+@media (max-width:480px){.bubble {padding:15px;}}
