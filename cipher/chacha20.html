@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://hutlaw.github.io/images/pfp.png" type="image/png">
+  <link rel="stylesheet" href="chacha20.css">
+  <title>ChaCha20 Cipher</title>
+  <meta property="og:title" content="ChaCha20 Cipher">
+  <meta property="og:description" content="Encrypt and decrypt messages using ChaCha20">
+  <meta name="description" content="Encrypt and decrypt messages using the ChaCha20 stream cipher.">
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <div class="bubble-container">
+    <div class="bubble">
+      <h1>ChaCha20 Cipher</h1>
+      <p>Secure your messages using the ChaCha20 stream cipher. This demo performs encryption and decryption using a 256-bit key and 96-bit nonce.</p>
+      <button onclick="location.href='https://hutlaw.xyz/cipher/main.html'">Back to Main</button>
+    </div>
+    <div class="bubble">
+      <h1>Encoder</h1>
+      <label for="chacha20Message">Enter Message:</label>
+      <textarea id="chacha20Message" placeholder="Type your message..."></textarea>
+      <label for="chacha20Key">Enter 256-bit Key (64 hex characters):</label>
+      <input type="text" id="chacha20Key" placeholder="Key (64 hex digits)">
+      <label for="chacha20Nonce">Enter 96-bit Nonce (24 hex characters):</label>
+      <input type="text" id="chacha20Nonce" placeholder="Nonce (24 hex digits)">
+      <label for="chacha20Counter">Enter Counter:</label>
+      <input type="text" id="chacha20Counter" placeholder="Counter (e.g., 1)">
+      <button onclick="chacha20EncryptMessage()">Encrypt</button>
+      <label for="chacha20Encrypted">Encrypted Message (hex):</label>
+      <textarea id="chacha20Encrypted" readonly></textarea>
+    </div>
+    <div class="bubble">
+      <h1>Decoder</h1>
+      <label for="chacha20Ciphertext">Enter Encrypted Message (hex):</label>
+      <textarea id="chacha20Ciphertext" placeholder="Paste encrypted hex..."></textarea>
+      <label for="chacha20KeyDec">Enter 256-bit Key (64 hex characters):</label>
+      <input type="text" id="chacha20KeyDec" placeholder="Key (64 hex digits)">
+      <label for="chacha20NonceDec">Enter 96-bit Nonce (24 hex characters):</label>
+      <input type="text" id="chacha20NonceDec" placeholder="Nonce (24 hex digits)">
+      <label for="chacha20CounterDec">Enter Counter:</label>
+      <input type="text" id="chacha20CounterDec" placeholder="Counter (e.g., 1)">
+      <button onclick="chacha20DecryptMessage()">Decrypt</button>
+      <label for="chacha20Decrypted">Decrypted Message:</label>
+      <textarea id="chacha20Decrypted" readonly></textarea>
+    </div>
+    <div class="bubble">
+      <h1>ChaCha20 Explained</h1>
+      <p><strong>What is ChaCha20?</strong> ChaCha20 is a stream cipher that generates a pseudorandom keystream which is XORed with plaintext to produce ciphertext.</p>
+      <p><strong>Key:</strong> A 256-bit (64 hex digit) key used to initialize the cipher.</p>
+      <p><strong>Nonce:</strong> A 96-bit (24 hex digit) number that should be unique for each encryption with the same key.</p>
+      <p><strong>Counter:</strong> A 32-bit number (often starting at 1) that increments for each 64-byte block.</p>
+      <p><strong>Note:</strong> This demo is for educational purposes only and is not intended for production security.</p>
+    </div>
+  </div>
+  <script src="chacha20.js"></script>
+</body>
+</html>
