@@ -148,12 +148,13 @@ function animateTileToCell(tileElement, cellElement) {
     clone.style.top = tileRect.top + "px";
     clone.style.width = tileRect.width + "px";
     clone.style.height = tileRect.height + "px";
-    clone.getBoundingClientRect();
-    let targetX = cellRect.left + (cellRect.width - tileRect.width) / 2;
-    let targetY = cellRect.top + (cellRect.height - tileRect.height) / 2;
-    let deltaX = targetX - tileRect.left;
-    let deltaY = targetY - tileRect.top;
-    clone.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+    requestAnimationFrame(() => {
+      let targetX = cellRect.left + (cellRect.width - tileRect.width) / 2;
+      let targetY = cellRect.top + (cellRect.height - tileRect.height) / 2;
+      let deltaX = targetX - tileRect.left;
+      let deltaY = targetY - tileRect.top;
+      clone.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+    });
     clone.addEventListener("transitionend", () => {
       clone.remove();
       resolve();
@@ -173,12 +174,13 @@ function animateCellToPool(cellElement, poolElement) {
     clone.style.top = cellRect.top + "px";
     clone.style.width = cellRect.width + "px";
     clone.style.height = cellRect.height + "px";
-    clone.getBoundingClientRect();
-    let targetX = poolRect.left + (poolRect.width - cellRect.width) / 2;
-    let targetY = poolRect.top + (poolRect.height - cellRect.height) / 2;
-    let deltaX = targetX - cellRect.left;
-    let deltaY = targetY - cellRect.top;
-    clone.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+    requestAnimationFrame(() => {
+      let targetX = poolRect.left + (poolRect.width - cellRect.width) / 2;
+      let targetY = poolRect.top + (poolRect.height - cellRect.height) / 2;
+      let deltaX = targetX - cellRect.left;
+      let deltaY = targetY - cellRect.top;
+      clone.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+    });
     clone.addEventListener("transitionend", () => {
       clone.remove();
       resolve();
