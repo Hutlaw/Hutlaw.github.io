@@ -53,6 +53,7 @@ header h1 { font-size: 2em; }
   100% { transform: rotateY(0deg); }
 }
 .cell.highlight { background: rgba(255,0,0,0.5); border-color: red; }
+.cell.hint { box-shadow: 0 0 10px 5px yellow; }
 #pool-counters { margin-bottom: 10px; font-size: 1.2em; }
 #pool {
   display: flex;
@@ -107,6 +108,7 @@ button {
 }
 #abilities { display: flex; gap: 10px; margin-top: 10px; }
 #abilities button { padding: 5px 10px; font-size: 0.9em; }
+#remove.selected { background: darkred; color: white; }
 .modal {
   position: fixed;
   top: 0;
