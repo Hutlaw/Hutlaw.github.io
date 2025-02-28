@@ -139,22 +139,24 @@ function checkFox() {
 
 function animateTileToCell(tileElement, cellElement) {
   return new Promise(resolve => {
-    let clone = tileElement.cloneNode(true);
+    const clone = tileElement.cloneNode(true);
     clone.classList.add("flying");
-    document.body.appendChild(clone);
-    let tileRect = tileElement.getBoundingClientRect();
-    let cellRect = cellElement.getBoundingClientRect();
+    const tileRect = tileElement.getBoundingClientRect();
+    const cellRect = cellElement.getBoundingClientRect();
     clone.style.left = tileRect.left + "px";
     clone.style.top = tileRect.top + "px";
     clone.style.width = tileRect.width + "px";
     clone.style.height = tileRect.height + "px";
-    requestAnimationFrame(() => {
-      let targetX = cellRect.left + (cellRect.width - tileRect.width) / 2;
-      let targetY = cellRect.top + (cellRect.height - tileRect.height) / 2;
-      let deltaX = targetX - tileRect.left;
-      let deltaY = targetY - tileRect.top;
-      clone.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
-    });
+    clone.style.position = "fixed";
+    clone.style.transition = "transform 0.6s ease-out";
+    document.body.appendChild(clone);
+    // Force reflow to ensure the browser registers the starting position
+    void clone.offsetWidth;
+    const targetX = cellRect.left + (cellRect.width - tileRect.width) / 2;
+    const targetY = cellRect.top + (cellRect.height - tileRect.height) / 2;
+    const deltaX = targetX - tileRect.left;
+    const deltaY = targetY - tileRect.top;
+    clone.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
     clone.addEventListener("transitionend", () => {
       clone.remove();
       resolve();
@@ -164,23 +166,24 @@ function animateTileToCell(tileElement, cellElement) {
 
 function animateCellToPool(cellElement, poolElement) {
   return new Promise(resolve => {
-    let clone = document.createElement("div");
+    const clone = document.createElement("div");
     clone.classList.add("tile", "flying");
     clone.textContent = cellElement.textContent;
-    document.body.appendChild(clone);
-    let cellRect = cellElement.getBoundingClientRect();
-    let poolRect = poolElement.getBoundingClientRect();
+    const cellRect = cellElement.getBoundingClientRect();
+    const poolRect = poolElement.getBoundingClientRect();
     clone.style.left = cellRect.left + "px";
     clone.style.top = cellRect.top + "px";
     clone.style.width = cellRect.width + "px";
     clone.style.height = cellRect.height + "px";
-    requestAnimationFrame(() => {
-      let targetX = poolRect.left + (poolRect.width - cellRect.width) / 2;
-      let targetY = poolRect.top + (poolRect.height - cellRect.height) / 2;
-      let deltaX = targetX - cellRect.left;
-      let deltaY = targetY - cellRect.top;
-      clone.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
-    });
+    clone.style.position = "fixed";
+    clone.style.transition = "transform 0.6s ease-out";
+    document.body.appendChild(clone);
+    void clone.offsetWidth;
+    const targetX = poolRect.left + (poolRect.width - cellRect.width) / 2;
+    const targetY = poolRect.top + (poolRect.height - cellRect.height) / 2;
+    const deltaX = targetX - cellRect.left;
+    const deltaY = targetY - cellRect.top;
+    clone.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
     clone.addEventListener("transitionend", () => {
       clone.remove();
       resolve();
