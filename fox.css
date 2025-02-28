@@ -57,17 +57,19 @@ header h1 { font-size: 2em; }
 #pool {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
   justify-content: center;
   margin-bottom: 20px;
 }
 .tile {
+  width: 80px;
+  height: 80px;
   background: #444;
   border: 2px solid rgba(255,255,255,0.4);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5em;
+  font-size: 1.8em;
   cursor: pointer;
   transition: transform 0.3s, background 0.3s;
   perspective: 1000px;
@@ -147,4 +149,9 @@ footer a {
 footer a:hover { text-decoration: underline; }
 @media (max-width: 600px) {
   header h1 { font-size: 1.5em; }
+  .tile {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+  }
 }
