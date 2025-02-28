@@ -39,27 +39,37 @@ h1 { margin-bottom: 20px; }
   cursor: pointer;
   position: relative;
   transition: background 0.3s, transform 0.3s;
+  perspective: 1000px;
 }
 .cell.fixed {
   background: rgba(255,255,255,0.2);
   cursor: default;
 }
-.cell.flip { animation: flip 0.6s ease; }
-@keyframes flip {
+.cell.flip { animation: cellFlip 0.6s ease; }
+@keyframes cellFlip {
   0% { transform: rotateY(0deg); }
   50% { transform: rotateY(90deg); }
   100% { transform: rotateY(0deg); }
+}
+.cell.highlight {
+  background: rgba(255,0,0,0.5);
+  border-color: red;
+}
+#pool-counters {
+  margin-bottom: 10px;
+  font-size: 1.2em;
 }
 #pool {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
+  margin-bottom: 20px;
 }
 .tile {
   width: 60px;
   height: 60px;
-  background: rgba(255,255,255,0.1);
+  background: #444;
   border: 2px solid rgba(255,255,255,0.4);
   display: flex;
   align-items: center;
@@ -67,10 +77,32 @@ h1 { margin-bottom: 20px; }
   font-size: 1.5em;
   cursor: pointer;
   transition: transform 0.3s, background 0.3s;
+  perspective: 1000px;
+  position: relative;
+}
+.tile .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #222, #555);
+  border-radius: 5px;
 }
 .tile.selected {
   border-color: gold;
-  transform: scale(1.1);
+  animation: pulse 0.5s;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+.tile.flip {
+  animation: tileFlip 0.6s forwards;
+}
+@keyframes tileFlip {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(90deg); }
+  100% { transform: rotateY(0deg); }
 }
 #message { margin-top: 20px; font-size: 1.5em; }
 button {
@@ -82,6 +114,11 @@ button {
   color: #000;
   cursor: pointer;
   border-radius: 5px;
+}
+.fade { animation: fadeEffect 0.5s; }
+@keyframes fadeEffect {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 @media (max-width: 600px) {
   #board { grid-template-columns: repeat(4, 60px); grid-template-rows: repeat(4, 60px); gap: 4px; }
@@ -95,20 +132,20 @@ button {
 <div id="counters">Attempts: <span id="attempts">0</span> | Wins: <span id="wins">0</span></div>
 <div id="game">
   <div id="board"></div>
+  <div id="pool-counters"></div>
   <div id="pool"></div>
   <div id="message"></div>
   <button id="reset" style="display:none;">Reset Game</button>
 </div>
 <script>
 let board = [];
-let pool = [];
 let selectedTile = null;
 let gameOver = false;
 let attempts = parseInt(localStorage.getItem("attempts")) || 0;
 let wins = parseInt(localStorage.getItem("wins")) || 0;
 document.getElementById("attempts").textContent = attempts;
 document.getElementById("wins").textContent = wins;
-function initBoard() {
+function initBoard(){
   board = [];
   const boardElement = document.getElementById("board");
   boardElement.innerHTML = "";
@@ -132,9 +169,10 @@ function initBoard() {
           board[r][c] = selectedTile.letter;
           cell.textContent = selectedTile.letter;
           cell.classList.add("flip");
+          selectedTile.element.classList.remove("selected");
           selectedTile.element.remove();
           selectedTile = null;
-          updatePool();
+          updatePoolCounters();
           if(checkFox()){
             gameOver = true;
             attempts++;
@@ -159,8 +197,7 @@ function initBoard() {
     }
   }
 }
-function initPool() {
-  pool = [];
+function initPool(){
   const letters = [];
   for(let i=0;i<5;i++){ letters.push("X"); }
   for(let i=0;i<5;i++){ letters.push("F"); }
@@ -171,22 +208,27 @@ function initPool() {
   letters.forEach(letter => {
     let tile = document.createElement("div");
     tile.classList.add("tile");
-    tile.textContent = letter;
+    tile.dataset.letter = letter;
+    tile.innerHTML = '<div class="back"></div>';
     tile.addEventListener("click", () => {
       if(gameOver) return;
       document.querySelectorAll(".tile").forEach(t => t.classList.remove("selected"));
       tile.classList.add("selected");
       selectedTile = { letter: letter, element: tile };
     });
-    pool.push({ letter: letter, element: tile });
     poolElement.appendChild(tile);
   });
+  updatePoolCounters();
 }
-function updatePool() {
-  if(selectedTile){
-    selectedTile.element.classList.remove("selected");
-    selectedTile = null;
-  }
+function updatePoolCounters(){
+  const poolTiles = document.querySelectorAll("#pool .tile");
+  let counts = { X: 0, F: 0, O: 0 };
+  poolTiles.forEach(tile => {
+    let l = tile.dataset.letter;
+    counts[l]++;
+  });
+  const poolCounters = document.getElementById("pool-counters");
+  poolCounters.textContent = "Remaining - X: " + counts["X"] + " | F: " + counts["F"] + " | O: " + counts["O"];
 }
 function isBoardFull(){
   for(let r=0;r<4;r++){
@@ -204,15 +246,23 @@ function checkFox(){
       for(let d=0; d<directions.length; d++){
         let dr = directions[d][0], dc = directions[d][1];
         let letters = board[r][c];
+        let cells = [[r,c]];
         for(let k=1;k<3;k++){
           let nr = r + dr*k;
           let nc = c + dc*k;
           if(nr>=0 && nr<4 && nc>=0 && nc<4){
             letters += board[nr][nc];
+            cells.push([nr,nc]);
           }
         }
         if(letters.length===3){
-          if((letters==="FOX")||(letters==="XOF")) return true;
+          if(letters==="FOX" || letters==="XOF"){
+            cells.forEach(coord => {
+              let cellEl = document.querySelector('.cell[data-row="'+coord[0]+'"][data-col="'+coord[1]+'"]');
+              if(cellEl) cellEl.classList.add("highlight");
+            });
+            return true;
+          }
         }
       }
     }
@@ -220,11 +270,19 @@ function checkFox(){
   return false;
 }
 function resetGame(){
-  gameOver = false;
-  document.getElementById("message").textContent = "";
-  document.getElementById("reset").style.display = "none";
-  initBoard();
-  initPool();
+  document.getElementById("board").classList.add("fade");
+  document.getElementById("pool").classList.add("fade");
+  document.getElementById("pool-counters").classList.add("fade");
+  setTimeout(() => {
+    gameOver = false;
+    document.getElementById("message").textContent = "";
+    document.getElementById("reset").style.display = "none";
+    initBoard();
+    initPool();
+    document.getElementById("board").classList.remove("fade");
+    document.getElementById("pool").classList.remove("fade");
+    document.getElementById("pool-counters").classList.remove("fade");
+  }, 500);
 }
 document.getElementById("reset").addEventListener("click", resetGame);
 initBoard();
