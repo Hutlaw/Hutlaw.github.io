@@ -229,11 +229,9 @@ document.getElementById("reveal").addEventListener("click", () => {
   const poolTiles = document.querySelectorAll("#pool .tile");
   if (poolTiles.length === 0) return;
   const randomTile = poolTiles[Math.floor(Math.random() * poolTiles.length)];
-  const back = randomTile.querySelector(".back");
-  if (back) {
-    back.style.display = "none";
-    setTimeout(() => { back.style.display = "block"; }, 3000);
-  }
+  const originalHTML = randomTile.innerHTML;
+  randomTile.innerHTML = randomTile.dataset.letter;
+  setTimeout(() => { randomTile.innerHTML = originalHTML; }, 3000);
   revealCharges--;
   updateAbilityDisplay();
 });
