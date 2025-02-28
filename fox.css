@@ -1,4 +1,9 @@
-* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+* { box-sizing: border-box; }
 body {
   background: radial-gradient(circle, #0c1445, #030716);
   color: white;
@@ -9,7 +14,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   padding: 20px;
-  padding-bottom: 60px;
+  padding-bottom: 80px; /* extra space so content doesn't hide behind footer */
 }
 h1 { margin-bottom: 20px; }
 #counters { margin-bottom: 10px; font-size: 1.2em; }
