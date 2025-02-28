@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Don't Find the Fox</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: radial-gradient(circle, #0c1445, #030716);
+  color: white;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+h1 { margin-bottom: 20px; }
+#counters { margin-bottom: 10px; font-size: 1.2em; }
+#game { display: flex; flex-direction: column; align-items: center; }
+#board {
+  display: grid;
+  grid-template-columns: repeat(4, 80px);
+  grid-template-rows: repeat(4, 80px);
+  gap: 5px;
+  margin-bottom: 20px;
+}
+.cell {
+  width: 80px;
+  height: 80px;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.3s, transform 0.3s;
+}
+.cell.fixed {
+  background: rgba(255,255,255,0.2);
+  cursor: default;
+}
+.cell.flip { animation: flip 0.6s ease; }
+@keyframes flip {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(90deg); }
+  100% { transform: rotateY(0deg); }
+}
+#pool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.tile {
+  width: 60px;
+  height: 60px;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+}
+.tile.selected {
+  border-color: gold;
+  transform: scale(1.1);
+}
+#message { margin-top: 20px; font-size: 1.5em; }
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  background: gold;
+  color: #000;
+  cursor: pointer;
+  border-radius: 5px;
+}
+@media (max-width: 600px) {
+  #board { grid-template-columns: repeat(4, 60px); grid-template-rows: repeat(4, 60px); gap: 4px; }
+  .cell { width: 60px; height: 60px; font-size: 1.5em; }
+  .tile { width: 50px; height: 50px; font-size: 1.2em; }
+}
+</style>
+</head>
+<body>
+<h1>Don't Find the Fox</h1>
+<div id="counters">Attempts: <span id="attempts">0</span> | Wins: <span id="wins">0</span></div>
+<div id="game">
+  <div id="board"></div>
+  <div id="pool"></div>
+  <div id="message"></div>
+  <button id="reset" style="display:none;">Reset Game</button>
+</div>
+<script>
+let board = [];
+let pool = [];
+let selectedTile = null;
+let gameOver = false;
+let attempts = parseInt(localStorage.getItem("attempts")) || 0;
+let wins = parseInt(localStorage.getItem("wins")) || 0;
+document.getElementById("attempts").textContent = attempts;
+document.getElementById("wins").textContent = wins;
+function initBoard() {
+  board = [];
+  const boardElement = document.getElementById("board");
+  boardElement.innerHTML = "";
+  for(let r=0; r<4; r++){
+    board[r] = [];
+    for(let c=0; c<4; c++){
+      let cell = document.createElement("div");
+      cell.classList.add("cell");
+      cell.dataset.row = r;
+      cell.dataset.col = c;
+      if(r===c){
+        board[r][c] = "O";
+        cell.textContent = "O";
+        cell.classList.add("fixed");
+      } else {
+        board[r][c] = "";
+      }
+      cell.addEventListener("click", () => {
+        if(gameOver) return;
+        if(selectedTile && board[r][c]===""){
+          board[r][c] = selectedTile.letter;
+          cell.textContent = selectedTile.letter;
+          cell.classList.add("flip");
+          selectedTile.element.remove();
+          selectedTile = null;
+          updatePool();
+          if(checkFox()){
+            gameOver = true;
+            attempts++;
+            localStorage.setItem("attempts", attempts);
+            document.getElementById("attempts").textContent = attempts;
+            document.getElementById("message").textContent = "You lost! Fox found.";
+            document.getElementById("reset").style.display = "block";
+          } else if(isBoardFull()){
+            gameOver = true;
+            attempts++;
+            wins++;
+            localStorage.setItem("attempts", attempts);
+            localStorage.setItem("wins", wins);
+            document.getElementById("attempts").textContent = attempts;
+            document.getElementById("wins").textContent = wins;
+            document.getElementById("message").textContent = "You win! No fox.";
+            document.getElementById("reset").style.display = "block";
+          }
+        }
+      });
+      boardElement.appendChild(cell);
+    }
+  }
+}
+function initPool() {
+  pool = [];
+  const letters = [];
+  for(let i=0;i<5;i++){ letters.push("X"); }
+  for(let i=0;i<5;i++){ letters.push("F"); }
+  for(let i=0;i<2;i++){ letters.push("O"); }
+  letters.sort(() => Math.random()-0.5);
+  const poolElement = document.getElementById("pool");
+  poolElement.innerHTML = "";
+  letters.forEach(letter => {
+    let tile = document.createElement("div");
+    tile.classList.add("tile");
+    tile.textContent = letter;
+    tile.addEventListener("click", () => {
+      if(gameOver) return;
+      document.querySelectorAll(".tile").forEach(t => t.classList.remove("selected"));
+      tile.classList.add("selected");
+      selectedTile = { letter: letter, element: tile };
+    });
+    pool.push({ letter: letter, element: tile });
+    poolElement.appendChild(tile);
+  });
+}
+function updatePool() {
+  if(selectedTile){
+    selectedTile.element.classList.remove("selected");
+    selectedTile = null;
+  }
+}
+function isBoardFull(){
+  for(let r=0;r<4;r++){
+    for(let c=0;c<4;c++){
+      if(board[r][c]==="") return false;
+    }
+  }
+  return true;
+}
+function checkFox(){
+  const directions = [[0,1],[1,0],[1,1],[1,-1]];
+  for(let r=0; r<4; r++){
+    for(let c=0; c<4; c++){
+      if(board[r][c] === "") continue;
+      for(let d=0; d<directions.length; d++){
+        let dr = directions[d][0], dc = directions[d][1];
+        let letters = board[r][c];
+        for(let k=1;k<3;k++){
+          let nr = r + dr*k;
+          let nc = c + dc*k;
+          if(nr>=0 && nr<4 && nc>=0 && nc<4){
+            letters += board[nr][nc];
+          }
+        }
+        if(letters.length===3){
+          if((letters==="FOX")||(letters==="XOF")) return true;
+        }
+      }
+    }
+  }
+  return false;
+}
+function resetGame(){
+  gameOver = false;
+  document.getElementById("message").textContent = "";
+  document.getElementById("reset").style.display = "none";
+  initBoard();
+  initPool();
+}
+document.getElementById("reset").addEventListener("click", resetGame);
+initBoard();
+initPool();
+</script>
+</body>
+</html>
