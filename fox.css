@@ -9,7 +9,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   padding: 20px;
-  padding-bottom: 60px; /* extra space so content doesn't hide behind footer */
+  padding-bottom: 60px;
 }
 h1 { margin-bottom: 20px; }
 #counters { margin-bottom: 10px; font-size: 1.2em; }
